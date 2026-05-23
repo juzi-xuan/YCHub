@@ -6,6 +6,13 @@
   <meta name="description" content="青途校园 YCHub - 活动详情页面">
   <title>第 18 届程序设计大赛 - 青途校园 YCHub</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* 页面整体背景 - 天青色渐变 */
+    .detail-page-wrapper {
+      background: linear-gradient(to top, #7BA1A9 0%, #9BBCC4 30%, #C5D8DC 55%, #E8F0F2 80%, #FFFFFF 100%);
+      min-height: 100vh;
+    }
+  </style>
 </head>
 <body>
   <!-- 顶部导航栏 -->
@@ -18,14 +25,13 @@
       <div class="navbar-menu">
         <a href="index.html" class="navbar-item">首页</a>
         <a href="classify.html" class="navbar-item">活动分类</a>
-        <a href="detail.html" class="navbar-item active">活动详情</a>
         <a href="user.html" class="navbar-item">个人中心</a>
       </div>
     </div>
   </nav>
 
   <!-- 页面内容 -->
-  <main class="page-wrapper">
+  <main class="page-wrapper detail-page-wrapper">
     <section class="detail-page">
       <div class="container">
         <!-- 面包屑导航 -->
@@ -39,7 +45,6 @@
 
         <!-- 活动头部 -->
         <header class="detail-header">
-          <div class="detail-cover">🏆</div>
           <h1 class="detail-title">第 18 届程序设计大赛</h1>
         </header>
 

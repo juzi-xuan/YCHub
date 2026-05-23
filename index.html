@@ -6,6 +6,316 @@
   <meta name="description" content="青途校园 YCHub - 汇聚校园精彩活动，发现无限可能">
   <title>青途校园 YCHub - 首页</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* ============================================
+       首页专用样式 - 天青色国风主题（紧凑版）
+       ============================================ */
+    
+    /* 页面整体背景 - 天青色渐变布满全屏 */
+    .home-page {
+      background: linear-gradient(to top, #7BA1A9 0%, #9BBCC4 30%, #C5D8DC 55%, #E8F0F2 80%, #FFFFFF 100%);
+      min-height: 100vh;
+      padding: 0;
+    }
+    
+    /* 内容容器 */
+    .hero-card {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 40px 30px;
+    }
+    
+    /* ===== 轮播图区域 ===== */
+    .carousel-wrapper {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 320px;
+      perspective: 1200px;
+    }
+    
+    /* 轮播轨道 */
+    .carousel-track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* 轮播项基础样式 */
+    .carousel-item {
+      position: absolute;
+      width: 280px;
+      height: 350px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      background: #fff;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .carousel-item:hover {
+      text-decoration: none;
+    }
+    
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, #e0e0e0 0%, #f0f0f0 50%, #e0e0e0 100%);
+    }
+    
+    /* 图片加载失败时的占位样式 */
+    .carousel-item img::before {
+      content: '📷';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      opacity: 0.3;
+    }
+    
+    /* 轮播项层叠位置定义 - 5层深度，水平层叠重叠效果 */
+    /* 最左侧（第2层） */
+    .carousel-item.level-2-left {
+      transform: translateX(-320px) scale(0.75);
+      z-index: 3;
+      opacity: 0.6;
+      filter: brightness(0.9);
+    }
+    
+    /* 左侧（第1层） */
+    .carousel-item.level-1-left {
+      transform: translateX(-160px) scale(0.88);
+      z-index: 5;
+      opacity: 0.85;
+      filter: brightness(0.95);
+    }
+    
+    /* 中间激活项 */
+    .carousel-item.active {
+      transform: translateX(0) scale(1);
+      z-index: 10;
+      opacity: 1;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+    
+    /* 右侧（第1层） */
+    .carousel-item.level-1-right {
+      transform: translateX(160px) scale(0.88);
+      z-index: 5;
+      opacity: 0.85;
+      filter: brightness(0.95);
+    }
+    
+    /* 最右侧（第2层） */
+    .carousel-item.level-2-right {
+      transform: translateX(320px) scale(0.75);
+      z-index: 3;
+      opacity: 0.6;
+      filter: brightness(0.9);
+    }
+    
+    /* 隐藏项 */
+    .carousel-item.hidden {
+      transform: translateX(0) scale(0.5);
+      z-index: 1;
+      opacity: 0;
+    }
+    
+    /* 轮播内容遮罩 - 仅激活项显示 */
+    .carousel-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 10px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
+      color: white;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .carousel-item.active .carousel-content {
+      opacity: 1;
+    }
+    
+    /* 活动标签 */
+    .carousel-tag {
+      display: inline-block;
+      padding: 3px 8px;
+      background: rgba(123, 161, 169, 0.9);
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+    
+    .carousel-tag.tag-competition { background: rgba(91, 140, 140, 0.9); }
+    .carousel-tag.tag-volunteer { background: rgba(139, 169, 123, 0.9); }
+    .carousel-tag.tag-lecture { background: rgba(123, 145, 169, 0.9); }
+    .carousel-tag.tag-sports { background: rgba(169, 140, 123, 0.9); }
+    
+    /* 活动标题 */
+    .carousel-item-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    /* 活动描述 */
+    .carousel-item-desc {
+      font-size: 10px;
+      opacity: 0.9;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    /* 轮播指示器 */
+    .carousel-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 15px;
+    }
+    
+    .indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .indicator.active {
+      background: #7BA1A9;
+      width: 24px;
+      border-radius: 4px;
+    }
+    
+    .indicator:hover {
+      background: rgba(0, 0, 0, 0.35);
+    }
+    
+    /* ===== 搜索区域 - 在统一卡片内 ===== */
+    .search-area {
+      padding: 20px 0 0;
+      text-align: center;
+    }
+    
+    .search-title {
+      font-size: 28px;
+      font-weight: 500;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+      letter-spacing: 3px;
+    }
+    
+    .search-subtitle {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 25px;
+      letter-spacing: 1px;
+    }
+    
+    /* 搜索框容器 */
+    .search-box-wrapper {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    /* 搜索框 */
+    .search-box {
+      display: flex;
+      background: #FFFFFF;
+      border-radius: 40px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      border: 1px solid #E0E0E0;
+      transition: box-shadow 0.3s ease;
+    }
+    
+    .search-box:focus-within {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    }
+    
+    .search-input {
+      flex: 1;
+      padding: 14px 22px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      color: #333333;
+      background: transparent;
+    }
+    
+    .search-input::placeholder {
+      color: #999999;
+    }
+    
+    /* 搜索按钮 */
+    .search-btn {
+      padding: 14px 28px;
+      background: #7BA1A9;
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+    }
+    
+    .search-btn:hover {
+      background: #6B9199;
+      padding: 14px 32px;
+    }
+    
+    /* 响应式适配 */
+    @media (max-width: 768px) {
+      .carousel-wrapper {
+        height: 220px;
+      }
+      
+      .carousel-item {
+        width: 150px;
+        height: 190px;
+      }
+      
+      .carousel-item.level-2-left {
+        transform: translateX(-200px) scale(0.65);
+      }
+      
+      .carousel-item.level-1-left {
+        transform: translateX(-110px) scale(0.8);
+      }
+      
+      .carousel-item.level-1-right {
+        transform: translateX(110px) scale(0.8);
+      }
+      
+      .carousel-item.level-2-right {
+        transform: translateX(200px) scale(0.65);
+      }
+      
+      .search-title {
+        font-size: 26px;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- 顶部导航栏 -->
@@ -18,22 +328,139 @@
       <div class="navbar-menu">
         <a href="index.html" class="navbar-item active">首页</a>
         <a href="classify.html" class="navbar-item">活动分类</a>
-        <a href="detail.html" class="navbar-item">活动详情</a>
         <a href="user.html" class="navbar-item">个人中心</a>
       </div>
     </div>
   </nav>
 
-  <!-- 页面内容 -->
-  <main class="page-wrapper">
-    <!-- 宣传标语横幅 + 搜索框 -->
-    <section class="hero-banner">
-      <div class="container">
-        <h1 class="hero-title">汇聚校园精彩活动</h1>
-        <p class="hero-subtitle">发现无限可能，期待你的参与</p>
+  <!-- 页面内容 - 统一的天青色渐变背景卡片 -->
+  <main class="page-wrapper home-page">
+    <div class="hero-card">
+      <!-- 热门活动轮播图 -->
+      <div class="carousel-wrapper">
+        <div class="carousel-track" id="carouselTrack">
+          <!-- 轮播图项目 - 所有12张海报 -->
+          <a href="detail.html" class="carousel-item" data-index="0">
+            <img src="images/posters/programming-contest.jpg" alt="第18届程序设计大赛">
+            <div class="carousel-content">
+              <span class="carousel-tag tag-competition">学科竞赛</span>
+              <h3 class="carousel-item-title">第18届程序设计大赛</h3>
+              <p class="carousel-item-desc">展示编程才华，与全校高手同台竞技</p>
+            </div>
+          </a>
+          
+          <a href="detail.html" class="carousel-item" data-index="1">
+            <img src="images/posters/environmental-action.jpg" alt="校园环保志愿行动">
+            <div class="carousel-content">
+              <span class="carousel-tag tag-volunteer">志愿公益</span>
+              <h3 class="carousel-item-title">校园环保志愿行动</h3>
+              <p class="carousel-item-desc">用行动守护绿色校园，共建美好环境</p>
+            </div>
+          </a>
+          
+          <a href="detail.html" class="carousel-item" data-index="2">
+            <img src="images/posters/ai-lecture.jpg" alt="AI技术前沿讲座">
+            <div class="carousel-content">
+              <span class="carousel-tag tag-lecture">学术讲座</span>
+              <h3 class="carousel-item-title">AI技术前沿讲座</h3>
+              <p class="carousel-item-desc">探索人工智能的未来发展趋势</p>
+            </div>
+          </a>
+          
+          <a href="detail.html" class="carousel-item" data-index="3">
+            <img src="images/posters/basketball-league.jpg" alt="校园篮球联赛">
+            <div class="carousel-content">
+              <span class="carousel-tag tag-sports">社团文体</span>
+              <h3 class="carousel-item-title">校园篮球联赛</h3>
+              <p class="carousel-item-desc">热血青春，挥洒汗水，为荣誉而战</p>
+            </div>
+          </a>
+          
+          <a href="detail.html" class="carousel-item" data-index="4">
+            <img src="images/posters/innovation-contest.jpg" alt="创新创业大赛">
+            <div class="carousel-content">
+              <span class="carousel-tag tag-competition">学科竞赛</span>
+              <h3 class="carousel-item-title">创新创业大赛</h3>
+              <p class="carousel-item-desc">点燃创业梦想，实现创新价值</p>
+            </div>
+          </a>
+          
+          <a href="detail.html" class="carousel-item" data-index="5">
+            <img src="images/posters/volunteer-recruitment.jpg" alt="公益支教志愿者招募">
+            <div class="carousel-content">
+              <span class="carousel-tag tag-volunteer">志愿公益</span>
+              <h3 class="carousel-item-title">公益支教志愿者招募</h3>
+              <p class="carousel-item-desc">用知识点亮希望，用爱心温暖童心</p>
+            </div>
+          </a>
+          
+          <a href="detail.html" class="carousel-item" data-index="6">
+            <img src="images/posters/cybersecurity-contest.jpg" alt="网络安全技能大赛">
+            <div class="carousel-content">
+              <span class="carousel-tag tag-competition">学科竞赛</span>
+              <h3 class="carousel-item-title">网络安全技能大赛</h3>
+              <p class="carousel-item-desc">守护网络安全，锤炼技术实力</p>
+            </div>
+          </a>
+          
+          <a href="detail.html" class="carousel-item" data-index="7">
+            <img src="images/posters/electronic-design.jpg" alt="电子设计竞赛">
+            <div class="carousel-content">
+              <span class="carousel-tag tag-competition">学科竞赛</span>
+              <h3 class="carousel-item-title">电子设计竞赛</h3>
+              <p class="carousel-item-desc">创新电子设计，展现工程魅力</p>
+            </div>
+          </a>
+          
+          <a href="detail.html" class="carousel-item" data-index="8">
+            <img src="images/posters/engineering-training.jpg" alt="工程训练综合能力竞赛">
+            <div class="carousel-content">
+              <span class="carousel-tag tag-competition">学科竞赛</span>
+              <h3 class="carousel-item-title">工程训练综合能力竞赛</h3>
+              <p class="carousel-item-desc">综合实践能力的大比拼</p>
+            </div>
+          </a>
+          
+          <a href="detail.html" class="carousel-item" data-index="9">
+            <img src="images/posters/industrial-design.jpg" alt="工业设计大赛">
+            <div class="carousel-content">
+              <span class="carousel-tag tag-competition">学科竞赛</span>
+              <h3 class="carousel-item-title">工业设计大赛</h3>
+              <p class="carousel-item-desc">创意与美的完美结合</p>
+            </div>
+          </a>
+          
+          <a href="detail.html" class="carousel-item" data-index="10">
+            <img src="images/posters/mobile-app-contest.jpg" alt="移动应用创新赛">
+            <div class="carousel-content">
+              <span class="carousel-tag tag-competition">学科竞赛</span>
+              <h3 class="carousel-item-title">移动应用创新赛</h3>
+              <p class="carousel-item-desc">移动时代，创意无限</p>
+            </div>
+          </a>
+          
+          <a href="detail.html" class="carousel-item" data-index="11">
+            <img src="images/posters/physics-contest.jpg" alt="大学生物理竞赛">
+            <div class="carousel-content">
+              <span class="carousel-tag tag-competition">学科竞赛</span>
+              <h3 class="carousel-item-title">大学生物理竞赛</h3>
+              <p class="carousel-item-desc">探索物理奥秘，激发科学兴趣</p>
+            </div>
+          </a>
+        </div>
         
-        <!-- 搜索框区域 -->
-        <div class="search-section">
+        <!-- 轮播指示器 -->
+        <div class="carousel-indicators" id="carouselIndicators">
+          <!-- 由JS动态生成12个指示器 -->
+        </div>
+      </div>
+
+      <!-- 搜索区域 - 与轮播在同一卡片内 -->
+      <div class="search-area">
+        <h1 class="search-title">汇聚校园精彩活动</h1>
+        <p class="search-subtitle">发现无限可能，期待你的参与</p>
+        
+        <div class="search-box-wrapper">
           <div class="search-box">
             <input 
               type="text" 
@@ -41,133 +468,11 @@
               placeholder="搜索活动名称、类型..."
               aria-label="搜索活动"
             >
-            <button class="search-btn" type="button">🔍 搜索</button>
+            <button class="search-btn" type="button">搜索</button>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- 近期热门活动列表 -->
-    <section class="hot-activities">
-      <div class="container">
-        <h2 class="section-title">热门活动</h2>
-        <div class="hot-activities-grid">
-          <!-- 活动卡片 1 -->
-          <article class="card activity-card">
-            <img class="card-image" src="images/posters/programming-contest.jpg" alt="第 18 届程序设计大赛海报">
-            <div class="card-content">
-              <span class="tag tag-primary activity-tag">学科竞赛</span>
-              <h3 class="activity-title">第 18 届程序设计大赛</h3>
-              <div class="activity-meta">
-                <div class="activity-meta-item">
-                  <span>📅</span>
-                  <span>2024-06-15 09:00</span>
-                </div>
-                <div class="activity-meta-item">
-                  <span>📍</span>
-                  <span>实验楼 301 机房</span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- 活动卡片 2 -->
-          <article class="card activity-card">
-            <img class="card-image" src="images/posters/environmental-action.jpg" alt="校园环保志愿行动海报">
-            <div class="card-content">
-              <span class="tag tag-secondary activity-tag">志愿公益</span>
-              <h3 class="activity-title">校园环保志愿行动</h3>
-              <div class="activity-meta">
-                <div class="activity-meta-item">
-                  <span>📅</span>
-                  <span>2024-05-25 08:00</span>
-                </div>
-                <div class="activity-meta-item">
-                  <span>📍</span>
-                  <span>校园东门集合</span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- 活动卡片 3 -->
-          <article class="card activity-card">
-            <img class="card-image" src="images/posters/ai-lecture.jpg" alt="AI 技术前沿讲座海报">
-            <div class="card-content">
-              <span class="tag tag-primary activity-tag">学术讲座</span>
-              <h3 class="activity-title">AI 技术前沿讲座</h3>
-              <div class="activity-meta">
-                <div class="activity-meta-item">
-                  <span>📅</span>
-                  <span>2024-05-28 19:00</span>
-                </div>
-                <div class="activity-meta-item">
-                  <span>📍</span>
-                  <span>图书馆报告厅</span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- 活动卡片 4 -->
-          <article class="card activity-card">
-            <img class="card-image" src="images/posters/basketball-league.jpg" alt="校园篮球联赛海报">
-            <div class="card-content">
-              <span class="tag tag-accent activity-tag">社团文体</span>
-              <h3 class="activity-title">校园篮球联赛</h3>
-              <div class="activity-meta">
-                <div class="activity-meta-item">
-                  <span>📅</span>
-                  <span>2024-06-01 14:00</span>
-                </div>
-                <div class="activity-meta-item">
-                  <span>📍</span>
-                  <span>体育馆</span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- 活动卡片 5 -->
-          <article class="card activity-card">
-            <img class="card-image" src="images/posters/innovation-contest.jpg" alt="创新创业大赛海报">
-            <div class="card-content">
-              <span class="tag tag-primary activity-tag">学科竞赛</span>
-              <h3 class="activity-title">创新创业大赛</h3>
-              <div class="activity-meta">
-                <div class="activity-meta-item">
-                  <span>📅</span>
-                  <span>2024-06-10 09:00</span>
-                </div>
-                <div class="activity-meta-item">
-                  <span>📍</span>
-                  <span>大学生活动中心</span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- 活动卡片 6 -->
-          <article class="card activity-card">
-            <img class="card-image" src="images/posters/volunteer-recruitment.jpg" alt="公益支教志愿者招募海报">
-            <div class="card-content">
-              <span class="tag tag-secondary activity-tag">志愿公益</span>
-              <h3 class="activity-title">公益支教志愿者招募</h3>
-              <div class="activity-meta">
-                <div class="activity-meta-item">
-                  <span>📅</span>
-                  <span>2024-06-05 10:00</span>
-                </div>
-                <div class="activity-meta-item">
-                  <span>📍</span>
-                  <span>行政楼 201</span>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+    </div>
   </main>
 
   <!-- 底部版权栏 -->
@@ -176,5 +481,175 @@
       <p>© 2024 青途校园 YCHub | 校园活动聚合平台</p>
     </div>
   </footer>
+
+  <!-- ============================================
+       轮播图逻辑 - 多层叠展示
+       ============================================ -->
+  <script>
+    (function() {
+      /* ===== 配置参数 ===== */
+      const CONFIG = {
+        autoPlayInterval: 3500,  // 自动轮播间隔（毫秒）
+        transitionDuration: 500  // 过渡动画时长（毫秒）
+      };
+      
+      /* ===== DOM元素 ===== */
+      const carouselItems = document.querySelectorAll('.carousel-item');
+      const indicatorsContainer = document.getElementById('carouselIndicators');
+      const totalItems = carouselItems.length;
+      
+      let currentIndex = 0;
+      let autoPlayTimer = null;
+      
+      /**
+       * 初始化轮播指示器
+       * 根据海报数量动态生成小圆点
+       */
+      function initIndicators() {
+        for (let i = 0; i < totalItems; i++) {
+          const indicator = document.createElement('span');
+          indicator.className = 'indicator' + (i === 0 ? ' active' : '');
+          indicator.dataset.index = i;
+          indicator.addEventListener('click', () => {
+            goToSlide(i);
+            resetAutoPlay();
+          });
+          indicatorsContainer.appendChild(indicator);
+        }
+      }
+      
+      /**
+       * 获取轮播项的层级位置
+       * 根据与当前项的距离，分配不同的层叠位置
+       * @param {number} itemIndex - 轮播项索引
+       * @returns {string} 层级类名
+       */
+      function getLevelClass(itemIndex) {
+        // 计算与当前项的距离（考虑循环）
+        let diff = itemIndex - currentIndex;
+        
+        // 处理循环边界
+        if (diff > totalItems / 2) {
+          diff -= totalItems;
+        } else if (diff < -totalItems / 2) {
+          diff += totalItems;
+        }
+        
+        // 根据距离分配层级
+        switch (diff) {
+          case 0:
+            return 'active';
+          case -1:
+          case totalItems - 1:
+            return 'level-1-left';
+          case 1:
+          case -(totalItems - 1):
+            return 'level-1-right';
+          case -2:
+          case totalItems - 2:
+            return 'level-2-left';
+          case 2:
+          case -(totalItems - 2):
+            return 'level-2-right';
+          default:
+            return 'hidden';
+        }
+      }
+      
+      /**
+       * 更新轮播图状态
+       * 为每个轮播项设置正确的层叠位置
+       */
+      function updateCarousel() {
+        carouselItems.forEach((item, index) => {
+          // 移除所有层级类
+          item.classList.remove(
+            'active', 
+            'level-1-left', 'level-1-right', 
+            'level-2-left', 'level-2-right', 
+            'hidden'
+          );
+          
+          // 添加新的层级类
+          const levelClass = getLevelClass(index);
+          item.classList.add(levelClass);
+        });
+        
+        // 更新指示器状态
+        const indicators = indicatorsContainer.querySelectorAll('.indicator');
+        indicators.forEach((indicator, index) => {
+          indicator.classList.toggle('active', index === currentIndex);
+        });
+      }
+      
+      /**
+       * 跳转到指定幻灯片
+       * @param {number} index - 目标索引
+       */
+      function goToSlide(index) {
+        currentIndex = index;
+        updateCarousel();
+      }
+      
+      /**
+       * 下一张幻灯片
+       */
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalItems;
+        updateCarousel();
+      }
+      
+      /**
+       * 开始自动轮播
+       */
+      function startAutoPlay() {
+        autoPlayTimer = setInterval(nextSlide, CONFIG.autoPlayInterval);
+      }
+      
+      /**
+       * 停止自动轮播
+       */
+      function stopAutoPlay() {
+        clearInterval(autoPlayTimer);
+      }
+      
+      /**
+       * 重置自动轮播（用于用户交互后）
+       */
+      function resetAutoPlay() {
+        stopAutoPlay();
+        startAutoPlay();
+      }
+      
+      /**
+       * 初始化轮播图
+       */
+      function init() {
+        initIndicators();
+        updateCarousel();
+        startAutoPlay();
+        
+        // 鼠标悬停时暂停自动播放
+        const carouselWrapper = document.querySelector('.carousel-wrapper');
+        carouselWrapper.addEventListener('mouseenter', stopAutoPlay);
+        carouselWrapper.addEventListener('mouseleave', startAutoPlay);
+        
+        // 点击轮播项切换（仅非激活项）
+        carouselItems.forEach((item, index) => {
+          item.addEventListener('click', (e) => {
+            if (index !== currentIndex) {
+              e.preventDefault(); // 阻止跳转，先切换轮播
+              goToSlide(index);
+              resetAutoPlay();
+            }
+            // 如果是当前激活项，不阻止默认行为，允许跳转
+          });
+        });
+      }
+      
+      // 启动轮播
+      init();
+    })();
+  </script>
 </body>
 </html>

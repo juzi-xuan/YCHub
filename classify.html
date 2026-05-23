@@ -6,6 +6,13 @@
   <meta name="description" content="青途校园 YCHub - 活动分类页面">
   <title>活动分类 - 青途校园 YCHub</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* 页面整体背景 - 天青色渐变 */
+    .classify-page-wrapper {
+      background: linear-gradient(to top, #7BA1A9 0%, #9BBCC4 30%, #C5D8DC 55%, #E8F0F2 80%, #FFFFFF 100%);
+      min-height: 100vh;
+    }
+  </style>
 </head>
 <body>
   <!-- 顶部导航栏 -->
@@ -18,14 +25,13 @@
       <div class="navbar-menu">
         <a href="index.html" class="navbar-item">首页</a>
         <a href="classify.html" class="navbar-item active">活动分类</a>
-        <a href="detail.html" class="navbar-item">活动详情</a>
         <a href="user.html" class="navbar-item">个人中心</a>
       </div>
     </div>
   </nav>
 
   <!-- 页面内容 -->
-  <main class="page-wrapper">
+  <main class="page-wrapper classify-page-wrapper">
     <section class="classify-page">
       <div class="container">
         <h1 class="section-title">活动分类</h1>
@@ -65,7 +71,7 @@
             <!-- 活动列表 -->
             <div class="activity-list">
               <!-- 活动项 1 -->
-              <article class="card activity-card">
+              <a href="detail.html" class="card activity-card">
                 <img class="card-image" src="images/posters/programming-contest.jpg" alt="第 18 届程序设计大赛海报">
                 <div class="card-content">
                   <span class="tag tag-primary activity-tag">学科竞赛</span>
@@ -85,10 +91,10 @@
                     </div>
                   </div>
                 </div>
-              </article>
+              </a>
 
               <!-- 活动项 2 -->
-              <article class="card activity-card">
+              <a href="detail.html" class="card activity-card">
                 <img class="card-image" src="images/posters/electronic-design.jpg" alt="电子设计大赛海报">
                 <div class="card-content">
                   <span class="tag tag-primary activity-tag">学科竞赛</span>
@@ -108,10 +114,10 @@
                     </div>
                   </div>
                 </div>
-              </article>
+              </a>
 
               <!-- 活动项 3 -->
-              <article class="card activity-card">
+              <a href="detail.html" class="card activity-card">
                 <img class="card-image" src="images/posters/physics-contest.jpg" alt="物理创新实验竞赛海报">
                 <div class="card-content">
                   <span class="tag tag-primary activity-tag">学科竞赛</span>
@@ -131,10 +137,10 @@
                     </div>
                   </div>
                 </div>
-              </article>
+              </a>
 
               <!-- 活动项 4 -->
-              <article class="card activity-card">
+              <a href="detail.html" class="card activity-card">
                 <img class="card-image" src="images/posters/innovation-contest.jpg" alt="创新创业大赛海报">
                 <div class="card-content">
                   <span class="tag tag-primary activity-tag">学科竞赛</span>
@@ -154,10 +160,10 @@
                     </div>
                   </div>
                 </div>
-              </article>
+              </a>
 
               <!-- 活动项 5 -->
-              <article class="card activity-card">
+              <a href="detail.html" class="card activity-card">
                 <img class="card-image" src="images/posters/engineering-training.jpg" alt="工程训练竞赛海报">
                 <div class="card-content">
                   <span class="tag tag-primary activity-tag">学科竞赛</span>
@@ -177,10 +183,10 @@
                     </div>
                   </div>
                 </div>
-              </article>
+              </a>
 
               <!-- 活动项 6 -->
-              <article class="card activity-card">
+              <a href="detail.html" class="card activity-card">
                 <img class="card-image" src="images/posters/cybersecurity-contest.jpg" alt="网络安全技能大赛海报">
                 <div class="card-content">
                   <span class="tag tag-primary activity-tag">学科竞赛</span>
@@ -200,10 +206,10 @@
                     </div>
                   </div>
                 </div>
-              </article>
+              </a>
 
               <!-- 活动项 7 -->
-              <article class="card activity-card">
+              <a href="detail.html" class="card activity-card">
                 <img class="card-image" src="images/posters/industrial-design.jpg" alt="工业设计大赛海报">
                 <div class="card-content">
                   <span class="tag tag-primary activity-tag">学科竞赛</span>
@@ -223,10 +229,10 @@
                     </div>
                   </div>
                 </div>
-              </article>
+              </a>
 
               <!-- 活动项 8 -->
-              <article class="card activity-card">
+              <a href="detail.html" class="card activity-card">
                 <img class="card-image" src="images/posters/mobile-app-contest.jpg" alt="移动应用开发大赛海报">
                 <div class="card-content">
                   <span class="tag tag-primary activity-tag">学科竞赛</span>
@@ -246,7 +252,7 @@
                     </div>
                   </div>
                 </div>
-              </article>
+              </a>
             </div>
 
             <!-- 分页 -->
