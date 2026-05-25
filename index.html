@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -284,7 +284,230 @@
       padding: 14px 32px;
     }
     
+    /* ===== 搜索结果区域 ===== */
+    .search-results-section {
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .search-results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .search-results-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+    
+    .search-results-count {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .clear-search-btn {
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .clear-search-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    /* 搜索结果网格 */
+    .search-results-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    
+    .search-result-card {
+      background: #FFFFFF;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .search-result-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .search-result-card:hover .search-result-title {
+      color: #7BA1A9;
+    }
+    
+    .search-result-image {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .search-result-content {
+      padding: 15px;
+    }
+    
+    .search-result-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    
+    .search-result-tag.tag-competition { background: rgba(91, 140, 140, 0.15); color: #5B8C8C; }
+    .search-result-tag.tag-volunteer { background: rgba(139, 169, 123, 0.15); color: #8BA97B; }
+    .search-result-tag.tag-lecture { background: rgba(123, 145, 169, 0.15); color: #7B91A9; }
+    .search-result-tag.tag-sports { background: rgba(169, 140, 123, 0.15); color: #A98C7B; }
+    .search-result-tag.tag-recruitment { background: rgba(169, 123, 145, 0.15); color: #A97B91; }
+    
+    .search-result-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #333333;
+      margin-bottom: 8px;
+      line-height: 1.4;
+      transition: color 0.3s ease;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .search-result-meta {
+      font-size: 12px;
+      color: #888888;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .search-result-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    /* 搜索高亮 */
+    .highlight {
+      background: rgba(123, 161, 169, 0.3);
+      padding: 0 2px;
+      border-radius: 2px;
+      font-weight: 600;
+    }
+    
+    /* 空状态 */
+    .search-empty-state {
+      text-align: center;
+      padding: 50px 20px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .search-empty-icon {
+      font-size: 60px;
+      margin-bottom: 20px;
+      opacity: 0.7;
+    }
+    
+    .search-empty-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .search-empty-desc {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+    
+    .search-suggestions {
+      margin-top: 20px;
+    }
+    
+    .search-suggestions-title {
+      font-size: 13px;
+      margin-bottom: 12px;
+      opacity: 0.9;
+    }
+    
+    .search-suggestion-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .search-suggestion-tag {
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      font-size: 13px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .search-suggestion-tag:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+    
+    /* 搜索加载状态 */
+    .search-loading {
+      text-align: center;
+      padding: 40px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .search-loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 15px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* 隐藏状态 */
+    .hidden {
+      display: none !important;
+    }
+    
     /* 响应式适配 */
+    @media (max-width: 1200px) {
+      .search-results-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    @media (max-width: 992px) {
+      .search-results-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
     @media (max-width: 768px) {
       .carousel-wrapper {
         height: 220px;
@@ -313,6 +536,16 @@
       
       .search-title {
         font-size: 26px;
+      }
+      
+      .search-results-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .search-results-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
       }
     }
   </style>
@@ -465,10 +698,41 @@
             <input 
               type="text" 
               class="search-input" 
+              id="searchInput"
               placeholder="搜索活动名称、类型..."
               aria-label="搜索活动"
+              autocomplete="off"
             >
-            <button class="search-btn" type="button">搜索</button>
+            <button class="search-btn" type="button" id="searchBtn">搜索</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 搜索结果区域 -->
+      <div class="search-results-section hidden" id="searchResultsSection">
+        <div class="search-results-header">
+          <div>
+            <h2 class="search-results-title">搜索结果</h2>
+            <span class="search-results-count" id="searchResultsCount"></span>
+          </div>
+          <button class="clear-search-btn" id="clearSearchBtn">清除搜索</button>
+        </div>
+        <div class="search-results-grid" id="searchResultsGrid">
+          <!-- 搜索结果将动态插入这里 -->
+        </div>
+        <div class="search-empty-state hidden" id="searchEmptyState">
+          <div class="search-empty-icon">🔍</div>
+          <h3 class="search-empty-title">未找到相关活动</h3>
+          <p class="search-empty-desc">试试其他关键词，或浏览下方的推荐活动</p>
+          <div class="search-suggestions">
+            <p class="search-suggestions-title">热门搜索：</p>
+            <div class="search-suggestion-tags" id="searchSuggestionTags">
+              <span class="search-suggestion-tag" data-keyword="程序设计">程序设计</span>
+              <span class="search-suggestion-tag" data-keyword="志愿">志愿</span>
+              <span class="search-suggestion-tag" data-keyword="讲座">讲座</span>
+              <span class="search-suggestion-tag" data-keyword="招聘">招聘</span>
+              <span class="search-suggestion-tag" data-keyword="篮球">篮球</span>
+            </div>
           </div>
         </div>
       </div>
@@ -649,6 +913,246 @@
       
       // 启动轮播
       init();
+    })();
+  </script>
+
+  <!-- ============================================
+       搜索功能逻辑
+       ============================================ -->
+  <script>
+    (function() {
+      /* ===== 活动数据 ===== */
+      const activitiesData = [
+        { id: 1, title: '第18届程序设计大赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'programming-contest.jpg', date: '2026-06-15 09:00', location: '实验楼 301 机房', participants: 128, description: '展示编程才华，与全校高手同台竞技' },
+        { id: 2, title: '校园环保志愿行动', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'environmental-action.jpg', date: '2026-06-20 14:00', location: '校园广场', participants: 156, description: '用行动守护绿色校园，共建美好环境' },
+        { id: 3, title: 'AI技术前沿讲座', tag: '学术讲座', tagClass: 'tag-lecture', image: 'ai-lecture.jpg', date: '2026-06-18 19:00', location: '图书馆报告厅', participants: 234, description: '探索人工智能的未来发展趋势' },
+        { id: 4, title: '校园篮球联赛', tag: '社团文体', tagClass: 'tag-sports', image: 'basketball-league.jpg', date: '2026-06-22 16:00', location: '体育馆', participants: 89, description: '热血青春，挥洒汗水，为荣誉而战' },
+        { id: 5, title: '创新创业大赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'innovation-contest.jpg', date: '2026-06-10 09:00', location: '大学生活动中心', participants: 156, description: '点燃创业梦想，实现创新价值' },
+        { id: 6, title: '公益支教志愿者招募', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'volunteer-recruitment.jpg', date: '2026-06-28 08:00', location: '希望小学', participants: 45, description: '用知识点亮希望，用爱心温暖童心' },
+        { id: 7, title: '网络安全技能大赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'cybersecurity-contest.jpg', date: '2026-06-25 13:00', location: '信工楼 401', participants: 89, description: '守护网络安全，锤炼技术实力' },
+        { id: 8, title: '电子设计竞赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'electronic-design.jpg', date: '2026-06-12 08:00', location: '电子实验楼', participants: 95, description: '创新电子设计，展现工程魅力' },
+        { id: 9, title: '工程训练综合能力竞赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'engineering-training.jpg', date: '2026-06-22 10:00', location: '工程训练中心', participants: 64, description: '综合实践能力的大比拼' },
+        { id: 10, title: '工业设计大赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'industrial-design.jpg', date: '2026-06-28 09:00', location: '艺术学院展厅', participants: 53, description: '创意与美的完美结合' },
+        { id: 11, title: '移动应用创新赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'mobile-app-contest.jpg', date: '2026-07-01 14:00', location: '软件学院报告厅', participants: 78, description: '移动时代，创意无限' },
+        { id: 12, title: '大学生物理竞赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'physics-contest.jpg', date: '2026-06-18 14:00', location: '物理实验楼', participants: 72, description: '探索物理奥秘，激发科学兴趣' },
+        { id: 13, title: '社区关爱老人活动', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'elderly-care.jpg', date: '2026-06-22 09:00', location: '阳光社区', participants: 89, description: '关爱老人，传递温暖' },
+        { id: 14, title: '图书馆整理志愿者', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'library-volunteer.jpg', date: '2026-06-25 14:00', location: '校图书馆', participants: 67, description: '整理图书，服务师生' },
+        { id: 15, title: '义务支教活动', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'teaching-volunteer.jpg', date: '2026-06-28 08:00', location: '希望小学', participants: 45, description: '用知识点亮希望' },
+        { id: 16, title: '爱心献血活动', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'blood-donation.jpg', date: '2026-07-01 09:00', location: '校医院', participants: 234, description: '无偿献血，传递爱心' },
+        { id: 17, title: '校园导览志愿者', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'campus-guide.jpg', date: '2026-07-05 08:00', location: '校门口', participants: 56, description: '引导新生，展示校园' },
+        { id: 18, title: '动物保护宣传', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'animal-protection.jpg', date: '2026-07-08 14:00', location: '生态园', participants: 78, description: '保护动物，人人有责' },
+        { id: 19, title: '垃圾分类宣传', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'recycling.jpg', date: '2026-07-10 10:00', location: '各宿舍楼', participants: 123, description: '垃圾分类，从我做起' },
+        { id: 20, title: '量子计算入门讲座', tag: '学术讲座', tagClass: 'tag-lecture', image: 'quantum-lecture.jpg', date: '2026-06-20 14:00', location: '理学院报告厅', participants: 189, description: '探索量子计算的奥秘' },
+        { id: 21, title: '区块链技术应用', tag: '学术讲座', tagClass: 'tag-lecture', image: 'blockchain-lecture.jpg', date: '2026-06-22 19:00', location: '计算机学院', participants: 156, description: '了解区块链技术的应用前景' },
+        { id: 22, title: '新能源技术发展', tag: '学术讲座', tagClass: 'tag-lecture', image: 'energy-lecture.jpg', date: '2026-06-25 14:00', location: '能源学院', participants: 134, description: '新能源技术的发展趋势' },
+        { id: 23, title: '心理学与生活', tag: '学术讲座', tagClass: 'tag-lecture', image: 'psychology-lecture.jpg', date: '2026-06-28 19:00', location: '心理学院', participants: 267, description: '心理学在日常生活中的应用' },
+        { id: 24, title: '金融投资基础', tag: '学术讲座', tagClass: 'tag-lecture', image: 'finance-lecture.jpg', date: '2026-07-01 14:00', location: '经管学院', participants: 198, description: '学习金融投资的基础知识' },
+        { id: 25, title: '创新创业分享会', tag: '学术讲座', tagClass: 'tag-lecture', image: 'startup-lecture.jpg', date: '2026-07-05 19:00', location: '创业中心', participants: 145, description: '创业经验分享与交流' },
+        { id: 26, title: '大数据时代机遇', tag: '学术讲座', tagClass: 'tag-lecture', image: 'bigdata-lecture.jpg', date: '2026-07-08 14:00', location: '数据学院', participants: 176, description: '大数据时代的机遇与挑战' },
+        { id: 27, title: '校园歌手大赛', tag: '社团文体', tagClass: 'tag-sports', image: 'singer-contest.jpg', date: '2026-06-22 18:30', location: '大礼堂', participants: 89, description: '唱响青春，展示才华' },
+        { id: 28, title: '篮球友谊赛', tag: '社团文体', tagClass: 'tag-sports', image: 'basketball.jpg', date: '2026-06-25 16:00', location: '体育馆', participants: 156, description: '以球会友，增进友谊' },
+        { id: 29, title: '舞蹈社团展演', tag: '社团文体', tagClass: 'tag-sports', image: 'dance-show.jpg', date: '2026-06-28 19:00', location: '学生活动中心', participants: 234, description: '舞动青春，绽放光彩' },
+        { id: 30, title: '摄影作品展', tag: '社团文体', tagClass: 'tag-sports', image: 'photo-exhibition.jpg', date: '2026-07-01 09:00', location: '艺术展厅', participants: 78, description: '用镜头记录美好瞬间' },
+        { id: 31, title: '话剧社年度大戏', tag: '社团文体', tagClass: 'tag-sports', image: 'drama-show.jpg', date: '2026-07-05 19:00', location: '剧场', participants: 189, description: '戏剧人生，精彩演绎' },
+        { id: 32, title: '羽毛球比赛', tag: '社团文体', tagClass: 'tag-sports', image: 'badminton.jpg', date: '2026-07-08 14:00', location: '羽毛球馆', participants: 134, description: '轻羽飞扬，激情对决' },
+        { id: 33, title: '书法社团展览', tag: '社团文体', tagClass: 'tag-sports', image: 'calligraphy.jpg', date: '2026-07-10 09:00', location: '图书馆大厅', participants: 67, description: '翰墨飘香，传承文化' },
+        { id: 34, title: '音乐节', tag: '社团文体', tagClass: 'tag-sports', image: 'music-festival.jpg', date: '2026-07-12 18:00', location: '操场', participants: 456, description: '音乐狂欢，青春飞扬' },
+        { id: 35, title: '腾讯校园招聘宣讲会', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'tencent-recruit.jpg', date: '2026-06-25 14:00', location: '就业中心', participants: 312, description: '腾讯校园招聘宣讲' },
+        { id: 36, title: '阿里巴巴校招宣讲', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'alibaba-recruit.jpg', date: '2026-06-28 14:00', location: '报告厅', participants: 289, description: '阿里巴巴校园招聘' },
+        { id: 37, title: '字节跳动招聘专场', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'bytedance-recruit.jpg', date: '2026-07-01 14:00', location: '计算机学院', participants: 267, description: '字节跳动校园招聘' },
+        { id: 38, title: '华为校园招聘', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'huawei-recruit.jpg', date: '2026-07-05 14:00', location: '就业中心', participants: 345, description: '华为校园招聘宣讲' },
+        { id: 39, title: '小米集团宣讲会', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'xiaomi-recruit.jpg', date: '2026-07-08 14:00', location: '报告厅', participants: 198, description: '小米集团校园招聘' },
+        { id: 40, title: '美团校招专场', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'meituan-recruit.jpg', date: '2026-07-10 14:00', location: '经管学院', participants: 234, description: '美团校园招聘宣讲' }
+      ];
+
+      /* ===== DOM元素 ===== */
+      const searchInput = document.getElementById('searchInput');
+      const searchBtn = document.getElementById('searchBtn');
+      const searchResultsSection = document.getElementById('searchResultsSection');
+      const searchResultsGrid = document.getElementById('searchResultsGrid');
+      const searchResultsCount = document.getElementById('searchResultsCount');
+      const searchEmptyState = document.getElementById('searchEmptyState');
+      const clearSearchBtn = document.getElementById('clearSearchBtn');
+      const searchSuggestionTags = document.getElementById('searchSuggestionTags');
+
+      /**
+       * 高亮匹配文本
+       * @param {string} text - 原文本
+       * @param {string} keyword - 关键词
+       * @returns {string} - 高亮后的HTML
+       */
+      function highlightText(text, keyword) {
+        if (!keyword) return text;
+        const regex = new RegExp(`(${escapeRegex(keyword)})`, 'gi');
+        return text.replace(regex, '<span class="highlight">$1</span>');
+      }
+
+      /**
+       * 转义正则特殊字符
+       * @param {string} string - 输入字符串
+       * @returns {string} - 转义后的字符串
+       */
+      function escapeRegex(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      }
+
+      /**
+       * 生成搜索结果卡片HTML
+       * @param {Object} activity - 活动数据
+       * @param {string} keyword - 搜索关键词
+       * @returns {string} - 卡片HTML
+       */
+      function generateResultCard(activity, keyword) {
+        const highlightedTitle = highlightText(activity.title, keyword);
+        const highlightedTag = highlightText(activity.tag, keyword);
+        
+        return `
+          <a href="detail.html" class="search-result-card" data-id="${activity.id}">
+            <img class="search-result-image" src="images/posters/${activity.image}" alt="${activity.title}">
+            <div class="search-result-content">
+              <span class="search-result-tag ${activity.tagClass}">${highlightedTag}</span>
+              <h3 class="search-result-title">${highlightedTitle}</h3>
+              <div class="search-result-meta">
+                <div class="search-result-meta-item">
+                  <span>📅</span>
+                  <span>${activity.date}</span>
+                </div>
+                <div class="search-result-meta-item">
+                  <span>📍</span>
+                  <span>${activity.location}</span>
+                </div>
+                <div class="search-result-meta-item">
+                  <span>👥</span>
+                  <span>${activity.participants} 人已报名</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        `;
+      }
+
+      /**
+       * 执行搜索
+       * @param {string} keyword - 搜索关键词
+       */
+      function performSearch(keyword) {
+        const trimmedKeyword = keyword.trim();
+        
+        if (!trimmedKeyword) {
+          hideSearchResults();
+          return;
+        }
+
+        // 过滤匹配的活动
+        const results = activitiesData.filter(activity => {
+          const searchFields = [
+            activity.title,
+            activity.tag,
+            activity.location,
+            activity.description
+          ];
+          return searchFields.some(field => 
+            field.toLowerCase().includes(trimmedKeyword.toLowerCase())
+          );
+        });
+
+        // 显示搜索结果区域
+        searchResultsSection.classList.remove('hidden');
+        
+        // 更新结果数量
+        searchResultsCount.textContent = `找到 ${results.length} 个相关活动`;
+
+        if (results.length === 0) {
+          // 显示空状态
+          searchResultsGrid.classList.add('hidden');
+          searchEmptyState.classList.remove('hidden');
+        } else {
+          // 显示结果
+          searchEmptyState.classList.add('hidden');
+          searchResultsGrid.classList.remove('hidden');
+          searchResultsGrid.innerHTML = results.map(activity => 
+            generateResultCard(activity, trimmedKeyword)
+          ).join('');
+        }
+
+        // 滚动到搜索结果区域
+        searchResultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      /**
+       * 隐藏搜索结果
+       */
+      function hideSearchResults() {
+        searchResultsSection.classList.add('hidden');
+        searchResultsGrid.innerHTML = '';
+        searchResultsCount.textContent = '';
+      }
+
+      /**
+       * 清除搜索
+       */
+      function clearSearch() {
+        searchInput.value = '';
+        hideSearchResults();
+        searchInput.focus();
+      }
+
+      /* ===== 事件绑定 ===== */
+      
+      // 搜索按钮点击
+      searchBtn.addEventListener('click', () => {
+        performSearch(searchInput.value);
+      });
+
+      // 输入框回车
+      searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          performSearch(searchInput.value);
+        }
+      });
+
+      // 清除搜索按钮
+      clearSearchBtn.addEventListener('click', clearSearch);
+
+      // 热门搜索标签点击
+      if (searchSuggestionTags) {
+        searchSuggestionTags.addEventListener('click', (e) => {
+          if (e.target.classList.contains('search-suggestion-tag')) {
+            const keyword = e.target.dataset.keyword;
+            searchInput.value = keyword;
+            performSearch(keyword);
+          }
+        });
+      }
+
+      // 输入框实时搜索（防抖）
+      let debounceTimer;
+      searchInput.addEventListener('input', (e) => {
+        clearTimeout(debounceTimer);
+        const value = e.target.value;
+        
+        if (!value.trim()) {
+          hideSearchResults();
+          return;
+        }
+        
+        debounceTimer = setTimeout(() => {
+          performSearch(value);
+        }, 300);
+      });
+
+      // 页面加载时检查URL参数
+      function checkUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('search');
+        if (searchQuery) {
+          searchInput.value = searchQuery;
+          performSearch(searchQuery);
+        }
+      }
+
+      // 初始化
+      checkUrlParams();
     })();
   </script>
 </body>
