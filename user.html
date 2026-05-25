@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -46,32 +46,46 @@
 
         <!-- 功能菜单区 -->
         <div class="user-menu">
-          <div class="menu-card">
+          <div class="menu-card active" data-section="enrolled" onclick="showSection('enrolled')">
             <span class="menu-badge">3</span>
             <div class="menu-icon blue">📋</div>
             <h3 class="menu-title">我的报名</h3>
             <p class="menu-desc">查看已报名活动</p>
           </div>
-          <div class="menu-card">
-            <span class="menu-badge">2</span>
-            <div class="menu-icon orange">🔔</div>
-            <h3 class="menu-title">活动提醒</h3>
-            <p class="menu-desc">即将开始的报名截止</p>
+          <div class="menu-card" data-section="favorites" onclick="showSection('favorites')">
+            <span class="menu-badge" id="favoriteBadge">0</span>
+            <div class="menu-icon orange">❤️</div>
+            <h3 class="menu-title">我的收藏</h3>
+            <p class="menu-desc">查看收藏的活动</p>
           </div>
-          <div class="menu-card">
+          <div class="menu-card" data-section="history" onclick="showSection('history')">
             <div class="menu-icon green">📜</div>
             <h3 class="menu-title">历史记录</h3>
             <p class="menu-desc">参与过的活动</p>
           </div>
-          <div class="menu-card">
+          <div class="menu-card" data-section="credits" onclick="showSection('credits')">
             <div class="menu-icon purple">🎓</div>
             <h3 class="menu-title">第二课堂</h3>
             <p class="menu-desc">归档与学分认证</p>
           </div>
         </div>
 
+        <!-- 我的收藏活动列表 -->
+        <div class="favorites-section" id="favoritesSection" style="display: none;">
+          <h2 class="section-title">我的收藏</h2>
+          <div class="favorites-grid" id="favoritesGrid">
+            <!-- 收藏的活动将动态插入这里 -->
+          </div>
+          <div class="favorites-empty" id="favoritesEmpty" style="display: none;">
+            <div class="favorites-empty-icon">🤍</div>
+            <h3 class="favorites-empty-title">暂无收藏活动</h3>
+            <p class="favorites-empty-desc">发现感兴趣的活动，点击心形图标添加收藏</p>
+            <a href="index.html" class="btn btn-primary">去发现活动</a>
+          </div>
+        </div>
+
         <!-- 已报名活动列表 -->
-        <div class="enrolled-section">
+        <div class="enrolled-section" id="enrolledSection">
           <h2 class="section-title">我的报名活动</h2>
           <div class="enrolled-list">
             <!-- 已报名活动 1 -->
@@ -160,6 +174,238 @@
             </div>
           </div>
         </div>
+
+        <!-- 历史记录板块 -->
+        <div class="enrolled-section" id="historySection" style="display: none;">
+          <h2 class="section-title">历史记录</h2>
+          <div class="enrolled-list">
+            <!-- 历史活动 1 -->
+            <div class="enrolled-item">
+              <div class="enrolled-icon" style="background: linear-gradient(135deg, #8B7355, #A0826D);">🏃</div>
+              <div class="enrolled-info">
+                <h3 class="enrolled-title">校园马拉松比赛</h3>
+                <div class="enrolled-meta">
+                  <span>📅 2026-04-15 07:00</span>
+                  <span>📍 校园操场</span>
+                  <span>✅ 已完成</span>
+                </div>
+              </div>
+              <span class="enrolled-status status-approved" style="background: rgba(123, 161, 169, 0.1); color: #7BA1A9;">已结束</span>
+              <div class="enrolled-actions">
+                <a href="detail.html" class="btn btn-sm btn-outline">查看详情</a>
+                <button class="btn btn-sm btn-outline" style="color: var(--secondary-color); border-color: var(--secondary-color);">下载证书</button>
+              </div>
+            </div>
+
+            <!-- 历史活动 2 -->
+            <div class="enrolled-item">
+              <div class="enrolled-icon" style="background: linear-gradient(135deg, #9B59B6, #BB8FCE);">🎤</div>
+              <div class="enrolled-info">
+                <h3 class="enrolled-title">校园歌手大赛决赛</h3>
+                <div class="enrolled-meta">
+                  <span>📅 2026-04-20 19:00</span>
+                  <span>📍 大礼堂</span>
+                  <span>✅ 已完成</span>
+                </div>
+              </div>
+              <span class="enrolled-status status-approved" style="background: rgba(123, 161, 169, 0.1); color: #7BA1A9;">已结束</span>
+              <div class="enrolled-actions">
+                <a href="detail.html" class="btn btn-sm btn-outline">查看详情</a>
+                <button class="btn btn-sm btn-outline" style="color: var(--secondary-color); border-color: var(--secondary-color);">下载证书</button>
+              </div>
+            </div>
+
+            <!-- 历史活动 3 -->
+            <div class="enrolled-item">
+              <div class="enrolled-icon" style="background: linear-gradient(135deg, #E74C3C, #F1948A);">🩸</div>
+              <div class="enrolled-info">
+                <h3 class="enrolled-title">爱心献血活动</h3>
+                <div class="enrolled-meta">
+                  <span>📅 2026-03-05 09:00</span>
+                  <span>📍 校医院</span>
+                  <span>✅ 已完成</span>
+                </div>
+              </div>
+              <span class="enrolled-status status-approved" style="background: rgba(123, 161, 169, 0.1); color: #7BA1A9;">已结束</span>
+              <div class="enrolled-actions">
+                <a href="detail.html" class="btn btn-sm btn-outline">查看详情</a>
+                <button class="btn btn-sm btn-outline" style="color: var(--secondary-color); border-color: var(--secondary-color);">下载证书</button>
+              </div>
+            </div>
+
+            <!-- 历史活动 4 -->
+            <div class="enrolled-item">
+              <div class="enrolled-icon" style="background: linear-gradient(135deg, #3498DB, #5DADE2);">💻</div>
+              <div class="enrolled-info">
+                <h3 class="enrolled-title">Python编程工作坊</h3>
+                <div class="enrolled-meta">
+                  <span>📅 2026-02-28 14:00</span>
+                  <span>📍 计算机学院实验室</span>
+                  <span>✅ 已完成</span>
+                </div>
+              </div>
+              <span class="enrolled-status status-approved" style="background: rgba(123, 161, 169, 0.1); color: #7BA1A9;">已结束</span>
+              <div class="enrolled-actions">
+                <a href="detail.html" class="btn btn-sm btn-outline">查看详情</a>
+                <button class="btn btn-sm btn-outline" style="color: var(--secondary-color); border-color: var(--secondary-color);">下载证书</button>
+              </div>
+            </div>
+
+            <!-- 历史活动 5 -->
+            <div class="enrolled-item">
+              <div class="enrolled-icon" style="background: linear-gradient(135deg, #F39C12, #F5B041);">🏅</div>
+              <div class="enrolled-info">
+                <h3 class="enrolled-title">新生迎新志愿服务</h3>
+                <div class="enrolled-meta">
+                  <span>📅 2025-09-01 08:00</span>
+                  <span>📍 校门口</span>
+                  <span>✅ 已完成</span>
+                </div>
+              </div>
+              <span class="enrolled-status status-approved" style="background: rgba(123, 161, 169, 0.1); color: #7BA1A9;">已结束</span>
+              <div class="enrolled-actions">
+                <a href="detail.html" class="btn btn-sm btn-outline">查看详情</a>
+                <button class="btn btn-sm btn-outline" style="color: var(--secondary-color); border-color: var(--secondary-color);">下载证书</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 第二课堂认证板块 -->
+        <div class="enrolled-section" id="creditsSection" style="display: none;">
+          <h2 class="section-title">第二课堂学分认证</h2>
+          
+          <!-- 学分统计卡片 -->
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 32px;">
+            <div style="background: linear-gradient(135deg, var(--primary-color), var(--primary-light)); border-radius: var(--radius-md); padding: 24px; text-align: center; color: white;">
+              <div style="font-size: 36px; font-weight: 700; margin-bottom: 8px;">12.5</div>
+              <div style="font-size: 14px; opacity: 0.9;">已获学分</div>
+            </div>
+            <div style="background: linear-gradient(135deg, var(--secondary-color), var(--secondary-light)); border-radius: var(--radius-md); padding: 24px; text-align: center; color: white;">
+              <div style="font-size: 36px; font-weight: 700; margin-bottom: 8px;">7.5</div>
+              <div style="font-size: 14px; opacity: 0.9;">还需学分</div>
+            </div>
+            <div style="background: linear-gradient(135deg, var(--accent-color), var(--accent-light)); border-radius: var(--radius-md); padding: 24px; text-align: center; color: white;">
+              <div style="font-size: 36px; font-weight: 700; margin-bottom: 8px;">28</div>
+              <div style="font-size: 14px; opacity: 0.9;">参与活动</div>
+            </div>
+            <div style="background: linear-gradient(135deg, #9B59B6, #BB8FCE); border-radius: var(--radius-md); padding: 24px; text-align: center; color: white;">
+              <div style="font-size: 36px; font-weight: 700; margin-bottom: 8px;">156</div>
+              <div style="font-size: 14px; opacity: 0.9;">志愿时长(h)</div>
+            </div>
+          </div>
+
+          <!-- 学分分类明细 -->
+          <div style="background: var(--bg-white); border-radius: var(--radius-md); padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow-card);">
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 20px; color: var(--text-primary);">学分分类明细</h3>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <!-- 学科竞赛 -->
+              <div style="display: flex; align-items: center; gap: 16px;">
+                <div style="width: 120px; font-size: 14px; color: var(--text-secondary);">学科竞赛</div>
+                <div style="flex: 1; height: 8px; background: var(--bg-color); border-radius: 4px; overflow: hidden;">
+                  <div style="width: 80%; height: 100%; background: linear-gradient(90deg, #4A90E2, #87CEEB); border-radius: 4px;"></div>
+                </div>
+                <div style="width: 60px; text-align: right; font-size: 14px; font-weight: 500; color: var(--text-primary);">4.0/5.0</div>
+              </div>
+              <!-- 志愿公益 -->
+              <div style="display: flex; align-items: center; gap: 16px;">
+                <div style="width: 120px; font-size: 14px; color: var(--text-secondary);">志愿公益</div>
+                <div style="flex: 1; height: 8px; background: var(--bg-color); border-radius: 4px; overflow: hidden;">
+                  <div style="width: 90%; height: 100%; background: linear-gradient(90deg, #5CB85C, #7DCB7D); border-radius: 4px;"></div>
+                </div>
+                <div style="width: 60px; text-align: right; font-size: 14px; font-weight: 500; color: var(--text-primary);">4.5/5.0</div>
+              </div>
+              <!-- 学术讲座 -->
+              <div style="display: flex; align-items: center; gap: 16px;">
+                <div style="width: 120px; font-size: 14px; color: var(--text-secondary);">学术讲座</div>
+                <div style="flex: 1; height: 8px; background: var(--bg-color); border-radius: 4px; overflow: hidden;">
+                  <div style="width: 60%; height: 100%; background: linear-gradient(90deg, #9B59B6, #BB8FCE); border-radius: 4px;"></div>
+                </div>
+                <div style="width: 60px; text-align: right; font-size: 14px; font-weight: 500; color: var(--text-primary);">1.5/2.5</div>
+              </div>
+              <!-- 社团文体 -->
+              <div style="display: flex; align-items: center; gap: 16px;">
+                <div style="width: 120px; font-size: 14px; color: var(--text-secondary);">社团文体</div>
+                <div style="flex: 1; height: 8px; background: var(--bg-color); border-radius: 4px; overflow: hidden;">
+                  <div style="width: 70%; height: 100%; background: linear-gradient(90deg, #E74C3C, #F1948A); border-radius: 4px;"></div>
+                </div>
+                <div style="width: 60px; text-align: right; font-size: 14px; font-weight: 500; color: var(--text-primary);">2.5/3.5</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 已认证活动列表 -->
+          <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--text-primary);">已认证活动</h3>
+          <div class="enrolled-list">
+            <!-- 认证活动 1 -->
+            <div class="enrolled-item">
+              <div class="enrolled-icon" style="background: linear-gradient(135deg, var(--secondary-color), var(--secondary-light));">✓</div>
+              <div class="enrolled-info">
+                <h3 class="enrolled-title">校园马拉松比赛</h3>
+                <div class="enrolled-meta">
+                  <span>📅 2026-04-15</span>
+                  <span>🏷️ 社团文体</span>
+                  <span>📄 学分：1.0</span>
+                </div>
+              </div>
+              <span class="enrolled-status status-approved">已认证</span>
+              <div class="enrolled-actions">
+                <button class="btn btn-sm btn-outline">查看证书</button>
+              </div>
+            </div>
+
+            <!-- 认证活动 2 -->
+            <div class="enrolled-item">
+              <div class="enrolled-icon" style="background: linear-gradient(135deg, var(--secondary-color), var(--secondary-light));">✓</div>
+              <div class="enrolled-info">
+                <h3 class="enrolled-title">爱心献血活动</h3>
+                <div class="enrolled-meta">
+                  <span>📅 2026-03-05</span>
+                  <span>🏷️ 志愿公益</span>
+                  <span>📄 学分：0.5</span>
+                </div>
+              </div>
+              <span class="enrolled-status status-approved">已认证</span>
+              <div class="enrolled-actions">
+                <button class="btn btn-sm btn-outline">查看证书</button>
+              </div>
+            </div>
+
+            <!-- 认证活动 3 -->
+            <div class="enrolled-item">
+              <div class="enrolled-icon" style="background: linear-gradient(135deg, var(--secondary-color), var(--secondary-light));">✓</div>
+              <div class="enrolled-info">
+                <h3 class="enrolled-title">Python编程工作坊</h3>
+                <div class="enrolled-meta">
+                  <span>📅 2026-02-28</span>
+                  <span>🏷️ 学科竞赛</span>
+                  <span>📄 学分：1.0</span>
+                </div>
+              </div>
+              <span class="enrolled-status status-approved">已认证</span>
+              <div class="enrolled-actions">
+                <button class="btn btn-sm btn-outline">查看证书</button>
+              </div>
+            </div>
+
+            <!-- 认证活动 4 -->
+            <div class="enrolled-item">
+              <div class="enrolled-icon" style="background: linear-gradient(135deg, var(--secondary-color), var(--secondary-light));">✓</div>
+              <div class="enrolled-info">
+                <h3 class="enrolled-title">新生迎新志愿服务</h3>
+                <div class="enrolled-meta">
+                  <span>📅 2025-09-01</span>
+                  <span>🏷️ 志愿公益</span>
+                  <span>📄 学分：1.0</span>
+                </div>
+              </div>
+              <span class="enrolled-status status-approved">已认证</span>
+              <div class="enrolled-actions">
+                <button class="btn btn-sm btn-outline">查看证书</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -170,5 +416,237 @@
       <p>© 2026 青途校园 YCHub | 校园活动聚合平台</p>
     </div>
   </footer>
+
+  <!-- ============================================
+       收藏功能逻辑
+       ============================================ -->
+  <script>
+    // 收藏功能命名空间
+    const FavoriteManager = {
+      STORAGE_KEY: 'ychub_favorites',
+      
+      // 获取所有收藏的活动ID
+      getFavorites() {
+        const favorites = localStorage.getItem(this.STORAGE_KEY);
+        return favorites ? JSON.parse(favorites) : [];
+      },
+      
+      // 保存收藏列表
+      saveFavorites(favorites) {
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(favorites));
+      },
+      
+      // 添加收藏
+      addFavorite(activityId) {
+        const favorites = this.getFavorites();
+        if (!favorites.includes(activityId)) {
+          favorites.push(activityId);
+          this.saveFavorites(favorites);
+        }
+      },
+      
+      // 取消收藏
+      removeFavorite(activityId) {
+        const favorites = this.getFavorites();
+        const index = favorites.indexOf(activityId);
+        if (index > -1) {
+          favorites.splice(index, 1);
+          this.saveFavorites(favorites);
+        }
+      },
+      
+      // 切换收藏状态
+      toggleFavorite(activityId) {
+        const favorites = this.getFavorites();
+        if (favorites.includes(activityId)) {
+          this.removeFavorite(activityId);
+          return false;
+        } else {
+          this.addFavorite(activityId);
+          return true;
+        }
+      },
+      
+      // 检查是否已收藏
+      isFavorited(activityId) {
+        const favorites = this.getFavorites();
+        return favorites.includes(activityId);
+      },
+      
+      // 获取收藏数量
+      getFavoriteCount() {
+        return this.getFavorites().length;
+      }
+    };
+
+    // 活动数据（与 classify.html 保持一致）
+    const allActivities = [
+      { id: 1, title: '第 18 届程序设计大赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'programming-contest.jpg', date: '2026-06-15 09:00', location: '实验楼 301 机房', participants: 128 },
+      { id: 2, title: '校园环保志愿活动', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'environmental-action.jpg', date: '2026-06-20 14:00', location: '校园广场', participants: 156 },
+      { id: 3, title: '人工智能前沿讲座', tag: '学术讲座', tagClass: 'tag-lecture', image: 'ai-lecture.jpg', date: '2026-06-18 19:00', location: '图书馆报告厅', participants: 234 },
+      { id: 4, title: '校园歌手大赛', tag: '社团文体', tagClass: 'tag-sports', image: 'singer-contest.jpg', date: '2026-06-22 18:30', location: '大礼堂', participants: 89 },
+      { id: 5, title: '腾讯校园招聘宣讲会', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'tencent-recruit.jpg', date: '2026-06-25 14:00', location: '就业中心', participants: 312 },
+      { id: 6, title: '电子设计大赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'electronic-design.jpg', date: '2026-06-12 08:00', location: '电子实验楼', participants: 95 },
+      { id: 7, title: '物理创新实验竞赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'physics-contest.jpg', date: '2026-06-18 14:00', location: '物理实验楼', participants: 72 },
+      { id: 8, title: '创新创业大赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'innovation-contest.jpg', date: '2026-06-10 09:00', location: '大学生活动中心', participants: 156 },
+      { id: 9, title: '工程训练竞赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'engineering-training.jpg', date: '2026-06-22 10:00', location: '工程训练中心', participants: 64 },
+      { id: 10, title: '网络安全技能大赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'cybersecurity-contest.jpg', date: '2026-06-25 13:00', location: '信工楼 401', participants: 89 },
+      { id: 11, title: '工业设计大赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'industrial-design.jpg', date: '2026-06-28 09:00', location: '艺术学院展厅', participants: 53 },
+      { id: 12, title: '移动应用开发大赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'mobile-app-contest.jpg', date: '2026-07-01 14:00', location: '软件学院报告厅', participants: 78 },
+      { id: 13, title: '社区关爱老人活动', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'elderly-care.jpg', date: '2026-06-22 09:00', location: '阳光社区', participants: 89 },
+      { id: 14, title: '图书馆整理志愿者', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'library-volunteer.jpg', date: '2026-06-25 14:00', location: '校图书馆', participants: 67 },
+      { id: 15, title: '义务支教活动', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'teaching-volunteer.jpg', date: '2026-06-28 08:00', location: '希望小学', participants: 45 },
+      { id: 16, title: '爱心献血活动', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'blood-donation.jpg', date: '2026-07-01 09:00', location: '校医院', participants: 234 },
+      { id: 17, title: '校园导览志愿者', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'campus-guide.jpg', date: '2026-07-05 08:00', location: '校门口', participants: 56 },
+      { id: 18, title: '动物保护宣传', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'animal-protection.jpg', date: '2026-07-08 14:00', location: '生态园', participants: 78 },
+      { id: 19, title: '垃圾分类宣传', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'recycling.jpg', date: '2026-07-10 10:00', location: '各宿舍楼', participants: 123 },
+      { id: 20, title: '量子计算入门讲座', tag: '学术讲座', tagClass: 'tag-lecture', image: 'quantum-lecture.jpg', date: '2026-06-20 14:00', location: '理学院报告厅', participants: 189 },
+      { id: 21, title: '区块链技术应用', tag: '学术讲座', tagClass: 'tag-lecture', image: 'blockchain-lecture.jpg', date: '2026-06-22 19:00', location: '计算机学院', participants: 156 },
+      { id: 22, title: '新能源技术发展', tag: '学术讲座', tagClass: 'tag-lecture', image: 'energy-lecture.jpg', date: '2026-06-25 14:00', location: '能源学院', participants: 134 },
+      { id: 23, title: '心理学与生活', tag: '学术讲座', tagClass: 'tag-lecture', image: 'psychology-lecture.jpg', date: '2026-06-28 19:00', location: '心理学院', participants: 267 },
+      { id: 24, title: '金融投资基础', tag: '学术讲座', tagClass: 'tag-lecture', image: 'finance-lecture.jpg', date: '2026-07-01 14:00', location: '经管学院', participants: 198 },
+      { id: 25, title: '创新创业分享会', tag: '学术讲座', tagClass: 'tag-lecture', image: 'startup-lecture.jpg', date: '2026-07-05 19:00', location: '创业中心', participants: 145 },
+      { id: 26, title: '大数据时代机遇', tag: '学术讲座', tagClass: 'tag-lecture', image: 'bigdata-lecture.jpg', date: '2026-07-08 14:00', location: '数据学院', participants: 176 },
+      { id: 27, title: '篮球友谊赛', tag: '社团文体', tagClass: 'tag-sports', image: 'basketball.jpg', date: '2026-06-25 16:00', location: '体育馆', participants: 156 },
+      { id: 28, title: '舞蹈社团展演', tag: '社团文体', tagClass: 'tag-sports', image: 'dance-show.jpg', date: '2026-06-28 19:00', location: '学生活动中心', participants: 234 },
+      { id: 29, title: '摄影作品展', tag: '社团文体', tagClass: 'tag-sports', image: 'photo-exhibition.jpg', date: '2026-07-01 09:00', location: '艺术展厅', participants: 78 },
+      { id: 30, title: '话剧社年度大戏', tag: '社团文体', tagClass: 'tag-sports', image: 'drama-show.jpg', date: '2026-07-05 19:00', location: '剧场', participants: 189 },
+      { id: 31, title: '羽毛球比赛', tag: '社团文体', tagClass: 'tag-sports', image: 'badminton.jpg', date: '2026-07-08 14:00', location: '羽毛球馆', participants: 134 },
+      { id: 32, title: '书法社团展览', tag: '社团文体', tagClass: 'tag-sports', image: 'calligraphy.jpg', date: '2026-07-10 09:00', location: '图书馆大厅', participants: 67 },
+      { id: 33, title: '音乐节', tag: '社团文体', tagClass: 'tag-sports', image: 'music-festival.jpg', date: '2026-07-12 18:00', location: '操场', participants: 456 },
+      { id: 34, title: '阿里巴巴校招宣讲', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'alibaba-recruit.jpg', date: '2026-06-28 14:00', location: '报告厅', participants: 289 },
+      { id: 35, title: '字节跳动招聘专场', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'bytedance-recruit.jpg', date: '2026-07-01 14:00', location: '计算机学院', participants: 267 },
+      { id: 36, title: '华为校园招聘', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'huawei-recruit.jpg', date: '2026-07-05 14:00', location: '就业中心', participants: 345 },
+      { id: 37, title: '小米集团宣讲会', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'xiaomi-recruit.jpg', date: '2026-07-08 14:00', location: '报告厅', participants: 198 },
+      { id: 38, title: '美团校招专场', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'meituan-recruit.jpg', date: '2026-07-10 14:00', location: '经管学院', participants: 234 },
+      { id: 39, title: '京东校园招聘', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'jd-recruit.jpg', date: '2026-07-12 14:00', location: '就业中心', participants: 256 },
+      { id: 40, title: '百度招聘宣讲会', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'baidu-recruit.jpg', date: '2026-07-15 14:00', location: '报告厅', participants: 223 }
+    ];
+
+    // 当前显示的板块
+    let currentSection = 'enrolled';
+
+    // 显示指定板块
+    function showSection(section) {
+      currentSection = section;
+      
+      // 更新菜单卡片选中状态
+      document.querySelectorAll('.menu-card').forEach(card => {
+        card.classList.remove('active');
+        if (card.dataset.section === section) {
+          card.classList.add('active');
+        }
+      });
+      
+      // 隐藏所有板块
+      document.getElementById('enrolledSection').style.display = 'none';
+      document.getElementById('favoritesSection').style.display = 'none';
+      document.getElementById('historySection').style.display = 'none';
+      document.getElementById('creditsSection').style.display = 'none';
+      
+      // 显示指定板块
+      if (section === 'enrolled') {
+        document.getElementById('enrolledSection').style.display = 'block';
+      } else if (section === 'favorites') {
+        document.getElementById('favoritesSection').style.display = 'block';
+        renderFavorites();
+      } else if (section === 'history') {
+        document.getElementById('historySection').style.display = 'block';
+      } else if (section === 'credits') {
+        document.getElementById('creditsSection').style.display = 'block';
+      }
+      
+      // 滚动到内容区域
+      document.querySelector('.user-menu').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // 渲染收藏列表
+    function renderFavorites() {
+      const favoritesGrid = document.getElementById('favoritesGrid');
+      const favoritesEmpty = document.getElementById('favoritesEmpty');
+      const favoriteIds = FavoriteManager.getFavorites();
+      
+      // 更新徽章数量
+      document.getElementById('favoriteBadge').textContent = favoriteIds.length;
+      
+      if (favoriteIds.length === 0) {
+        favoritesGrid.style.display = 'none';
+        favoritesEmpty.style.display = 'block';
+        return;
+      }
+      
+      favoritesGrid.style.display = 'grid';
+      favoritesEmpty.style.display = 'none';
+      
+      // 获取收藏的活动数据
+      const favoriteActivities = allActivities.filter(activity => favoriteIds.includes(activity.id));
+      
+      // 生成收藏卡片HTML
+      favoritesGrid.innerHTML = favoriteActivities.map(activity => `
+        <div class="card activity-card" data-id="${activity.id}">
+          <button class="favorite-btn favorited" data-id="${activity.id}" onclick="removeFavoriteFromList(event, ${activity.id})" title="取消收藏">
+            <span class="heart-icon">❤️</span>
+          </button>
+          <a href="detail.html?id=${activity.id}" style="text-decoration: none; color: inherit; display: block;">
+            <img class="card-image" src="images/posters/${activity.image}" alt="${activity.title}海报">
+            <div class="card-content">
+              <span class="tag tag-primary activity-tag">${activity.tag}</span>
+              <h3 class="activity-title">${activity.title}</h3>
+              <div class="activity-meta">
+                <div class="activity-meta-item">
+                  <span>📅</span>
+                  <span>${activity.date}</span>
+                </div>
+                <div class="activity-meta-item">
+                  <span>📍</span>
+                  <span>${activity.location}</span>
+                </div>
+                <div class="activity-meta-item">
+                  <span>👥</span>
+                  <span>已有 ${activity.participants} 人报名</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      `).join('');
+    }
+
+    // 从收藏列表中移除
+    function removeFavoriteFromList(event, activityId) {
+      event.preventDefault();
+      event.stopPropagation();
+      
+      FavoriteManager.removeFavorite(activityId);
+      showToast('已取消收藏 🤍');
+      renderFavorites();
+    }
+
+    // 显示提示消息
+    function showToast(message) {
+      const existingToast = document.querySelector('.favorite-toast');
+      if (existingToast) {
+        existingToast.remove();
+      }
+      
+      const toast = document.createElement('div');
+      toast.className = 'favorite-toast';
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => toast.classList.add('show'), 10);
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+      }, 2000);
+    }
+
+    // 页面加载时初始化
+    document.addEventListener('DOMContentLoaded', function() {
+      // 更新收藏徽章
+      document.getElementById('favoriteBadge').textContent = FavoriteManager.getFavoriteCount();
+    });
+  </script>
 </body>
 </html>

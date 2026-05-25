@@ -365,34 +365,55 @@
     const contentTitle = document.querySelector('.content-title');
     const activityList = document.querySelector('.activity-list');
 
+    // 为活动数据添加ID
+    let activityIdCounter = 1;
+    const activityIdMap = new Map();
+    
+    // 获取或创建活动ID
+    function getActivityId(activity) {
+      const key = activity.title;
+      if (!activityIdMap.has(key)) {
+        activityIdMap.set(key, activityIdCounter++);
+      }
+      return activityIdMap.get(key);
+    }
+    
     // 生成活动卡片HTML
     function generateActivityCard(activity) {
+      const activityId = getActivityId(activity);
+      const isFavorited = isActivityFavorited(activityId);
+      
       return `
-        <a href="detail.html" class="card activity-card">
-          <img class="card-image" src="images/posters/${activity.image}" alt="${activity.title}海报">
-          <div class="card-content">
-            <span class="tag tag-primary activity-tag">${activity.tag}</span>
-            <h3 class="activity-title">${activity.title}</h3>
-            <div class="activity-meta">
-              <div class="activity-meta-item">
-                <span>📅</span>
-                <span>${activity.date}</span>
-              </div>
-              <div class="activity-meta-item">
-                <span>⏰</span>
-                <span>报名截止：${activity.deadline}</span>
-              </div>
-              <div class="activity-meta-item">
-                <span>📍</span>
-                <span>${activity.location}</span>
-              </div>
-              <div class="activity-meta-item">
-                <span>👥</span>
-                <span>已有 ${activity.participants} 人报名</span>
+        <div class="card activity-card" data-id="${activityId}">
+          <button class="favorite-btn ${isFavorited ? 'favorited' : ''}" data-id="${activityId}" onclick="toggleFavorite(event, ${activityId})" title="${isFavorited ? '取消收藏' : '添加收藏'}">
+            <span class="heart-icon">${isFavorited ? '❤️' : '🤍'}</span>
+          </button>
+          <a href="detail.html?id=${activityId}" style="text-decoration: none; color: inherit; display: block;">
+            <img class="card-image" src="images/posters/${activity.image}" alt="${activity.title}海报">
+            <div class="card-content">
+              <span class="tag tag-primary activity-tag">${activity.tag}</span>
+              <h3 class="activity-title">${activity.title}</h3>
+              <div class="activity-meta">
+                <div class="activity-meta-item">
+                  <span>📅</span>
+                  <span>${activity.date}</span>
+                </div>
+                <div class="activity-meta-item">
+                  <span>⏰</span>
+                  <span>报名截止：${activity.deadline}</span>
+                </div>
+                <div class="activity-meta-item">
+                  <span>📍</span>
+                  <span>${activity.location}</span>
+                </div>
+                <div class="activity-meta-item">
+                  <span>👥</span>
+                  <span>已有 ${activity.participants} 人报名</span>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
       `;
     }
 
@@ -429,6 +450,121 @@
 
     // 页面加载时初始化活动数量显示
     updateActivityList('全部活动');
+  </script>
+
+  <!-- ============================================
+       收藏功能逻辑
+       ============================================ -->
+  <script>
+    // 收藏功能命名空间
+    const FavoriteManager = {
+      STORAGE_KEY: 'ychub_favorites',
+      
+      // 获取所有收藏的活动ID
+      getFavorites() {
+        const favorites = localStorage.getItem(this.STORAGE_KEY);
+        return favorites ? JSON.parse(favorites) : [];
+      },
+      
+      // 保存收藏列表
+      saveFavorites(favorites) {
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(favorites));
+      },
+      
+      // 添加收藏
+      addFavorite(activityId) {
+        const favorites = this.getFavorites();
+        if (!favorites.includes(activityId)) {
+          favorites.push(activityId);
+          this.saveFavorites(favorites);
+        }
+      },
+      
+      // 取消收藏
+      removeFavorite(activityId) {
+        const favorites = this.getFavorites();
+        const index = favorites.indexOf(activityId);
+        if (index > -1) {
+          favorites.splice(index, 1);
+          this.saveFavorites(favorites);
+        }
+      },
+      
+      // 切换收藏状态
+      toggleFavorite(activityId) {
+        const favorites = this.getFavorites();
+        if (favorites.includes(activityId)) {
+          this.removeFavorite(activityId);
+          return false;
+        } else {
+          this.addFavorite(activityId);
+          return true;
+        }
+      },
+      
+      // 检查是否已收藏
+      isFavorited(activityId) {
+        const favorites = this.getFavorites();
+        return favorites.includes(activityId);
+      },
+      
+      // 获取收藏数量
+      getFavoriteCount() {
+        return this.getFavorites().length;
+      }
+    };
+    
+    // 全局函数：检查活动是否已收藏
+    function isActivityFavorited(activityId) {
+      return FavoriteManager.isFavorited(activityId);
+    }
+    
+    // 全局函数：切换收藏状态
+    function toggleFavorite(event, activityId) {
+      event.preventDefault();
+      event.stopPropagation();
+      
+      const isFavorited = FavoriteManager.toggleFavorite(activityId);
+      const btn = event.currentTarget;
+      const heartIcon = btn.querySelector('.heart-icon');
+      
+      // 更新按钮状态
+      if (isFavorited) {
+        btn.classList.add('favorited');
+        heartIcon.textContent = '❤️';
+        btn.title = '取消收藏';
+        showToast('已添加到收藏 ❤️');
+      } else {
+        btn.classList.remove('favorited');
+        heartIcon.textContent = '🤍';
+        btn.title = '添加收藏';
+        showToast('已取消收藏 🤍');
+      }
+    }
+    
+    // 显示提示消息
+    function showToast(message) {
+      // 移除已有的toast
+      const existingToast = document.querySelector('.favorite-toast');
+      if (existingToast) {
+        existingToast.remove();
+      }
+      
+      // 创建新的toast
+      const toast = document.createElement('div');
+      toast.className = 'favorite-toast';
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      
+      // 显示动画
+      setTimeout(() => toast.classList.add('show'), 10);
+      
+      // 3秒后隐藏
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+      }, 2000);
+    }
   </script>
 </body>
 </html>

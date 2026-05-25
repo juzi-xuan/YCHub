@@ -1079,11 +1079,39 @@ input, textarea {
   transition: var(--transition);
   cursor: pointer;
   position: relative;
+  user-select: none;
+  border: 2px solid transparent;
 }
 
 .menu-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-hover);
+}
+
+.menu-card:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+/* 选中状态 - 天青色主题 */
+.menu-card.active {
+  background: var(--primary-color);
+  border-color: var(--primary-dark);
+  box-shadow: 0 4px 16px rgba(123, 161, 169, 0.4);
+}
+
+.menu-card.active .menu-title,
+.menu-card.active .menu-desc {
+  color: white;
+}
+
+.menu-card.active .menu-icon {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+}
+
+.menu-card.active .menu-badge {
+  background: white;
+  color: var(--primary-color);
 }
 
 .menu-icon {
@@ -1232,6 +1260,189 @@ input, textarea {
 .enrolled-actions {
   display: flex;
   gap: 10px;
+}
+
+/* ===== 收藏功能样式 ===== */
+
+/* 收藏按钮基础样式 */
+.favorite-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.1);
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.favorite-btn .heart-icon {
+  transition: all 0.3s ease;
+}
+
+/* 未收藏状态 */
+.favorite-btn:not(.favorited) .heart-icon {
+  color: #ccc;
+}
+
+.favorite-btn:not(.favorited):hover .heart-icon {
+  color: #ff6b6b;
+}
+
+/* 已收藏状态 */
+.favorite-btn.favorited {
+  background: white;
+}
+
+.favorite-btn.favorited .heart-icon {
+  color: #ff6b6b;
+}
+
+.favorite-btn.favorited:hover .heart-icon {
+  animation: heartbeat 0.6s ease-in-out;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.2); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.2); }
+}
+
+/* 活动卡片添加相对定位，用于收藏按钮绝对定位 */
+.activity-card,
+.search-result-card {
+  position: relative;
+}
+
+/* 详情页收藏按钮样式 */
+.detail-favorite-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.detail-favorite-btn:hover {
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
+
+.detail-favorite-btn.favorited {
+  background: #ff6b6b;
+  border-color: #ff6b6b;
+  color: white;
+}
+
+.detail-favorite-btn.favorited:hover {
+  background: #ff5252;
+  border-color: #ff5252;
+}
+
+.detail-favorite-btn .heart-icon {
+  font-size: 18px;
+}
+
+/* 收藏提示消息 */
+.favorite-toast {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 14px;
+  z-index: 9999;
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.favorite-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* 我的收藏页面样式 */
+.favorites-section {
+  background: var(--bg-white);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  margin-top: 32px;
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.favorites-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+}
+
+.favorites-empty-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.favorites-empty-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.favorites-empty-desc {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* 响应式适配 */
+@media (max-width: 1200px) {
+  .favorites-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .favorites-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .favorite-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
 }
 
 /* ===== 7. 响应式适配 ===== */
