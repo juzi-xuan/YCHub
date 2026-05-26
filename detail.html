@@ -4,13 +4,74 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="青途校园 YCHub - 活动详情页面">
-  <title>第 18 届程序设计大赛 - 青途校园 YCHub</title>
+  <title id="pageTitle">活动详情 - 青途校园 YCHub</title>
   <link rel="stylesheet" href="style.css">
   <style>
     /* 页面整体背景 - 天青色渐变 */
     .detail-page-wrapper {
       background: linear-gradient(to top, #7BA1A9 0%, #9BBCC4 30%, #C5D8DC 55%, #E8F0F2 80%, #FFFFFF 100%);
       min-height: 100vh;
+    }
+
+    /* 错误提示样式 */
+    .error-message {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-secondary);
+    }
+    .error-message h2 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+    .error-message p {
+      margin-bottom: 24px;
+    }
+    .error-message .btn-primary {
+      display: inline-block;
+      padding: 12px 32px;
+      background: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+
+    /* 返回按钮样式 - 圆形 */
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      color: var(--text-primary);
+      text-decoration: none;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 0;
+    }
+    .back-button:hover {
+      background: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transform: scale(1.05);
+    }
+    .back-button .back-icon {
+      font-size: 40px;
+      line-height: 1;
+      font-weight: 300;
+      text-align: center;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-right: 4px;
+      margin-top: -6px;
     }
   </style>
 </head>
@@ -34,161 +95,9 @@
   <main class="page-wrapper detail-page-wrapper">
     <section class="detail-page">
       <div class="container">
-        <!-- 活动头部 -->
-        <header class="detail-header">
-          <h1 class="detail-title">第 18 届程序设计大赛</h1>
-        </header>
-
-        <!-- 详情布局 -->
-        <div class="detail-layout">
-          <!-- 左侧主要内容 -->
-          <div class="detail-main">
-            <!-- 活动信息卡片 -->
-            <div class="detail-card">
-              <h2 class="detail-card-title">活动信息</h2>
-              <div class="info-grid">
-                <div class="info-item">
-                  <span class="info-label">主办单位</span>
-                  <span class="info-value">计算机科学与技术学院、校学生会</span>
-                </div>
-                <div class="info-item">
-                  <span class="info-label">活动时间</span>
-                  <span class="info-value">2026-06-15 09:00 - 18:00</span>
-                </div>
-                <div class="info-item">
-                  <span class="info-label">活动地点</span>
-                  <span class="info-value">实验楼 301 机房</span>
-                </div>
-                <div class="info-item">
-                  <span class="info-label">参与对象</span>
-                  <span class="info-value">全校本科生（建议大一至大三）</span>
-                </div>
-                <div class="info-item">
-                  <span class="info-label">报名截止</span>
-                  <span class="info-value" style="color: var(--accent-color);">2026-06-10 23:59</span>
-                </div>
-                <div class="info-item">
-                  <span class="info-label">活动容量</span>
-                  <span class="info-value">150 人（已报名 128 人）</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- 活动简介 -->
-            <div class="detail-card">
-              <h2 class="detail-card-title">活动简介</h2>
-              <div class="info-description">
-                <p>第 18 届程序设计大赛是由计算机科学与技术学院联合校学生会共同举办的一年一度的校园学术竞赛活动。本届大赛旨在激发广大同学对程序设计的兴趣，提升编程能力和创新思维，为同学们提供一个展示才华、交流学习的平台。</p>
-                <br>
-                <p><strong>竞赛形式：</strong>本次大赛采用个人赛形式，参赛选手需要在 5 小时内完成若干道算法编程题目。题目难度递进，涵盖基础语法、数据结构、算法设计等多个方面，既考察选手的基础功底，也考验其分析和解决问题的能力。</p>
-                <br>
-                <p><strong>参赛收获：</strong>优秀选手将有机会获得丰厚奖品和荣誉证书，同时表现突出者还将被推荐参加省级及国家级程序设计竞赛。此外，所有参赛选手均可获得第二课堂学分认证。</p>
-                <br>
-                <p><strong>往届风采：</strong>大赛已成功举办 17 届，累计参赛选手超过 3000 人次。许多优秀选手在毕业后已成为知名互联网企业的技术骨干。</p>
-              </div>
-            </div>
-
-            <!-- 奖项设置 -->
-            <div class="detail-card">
-              <h2 class="detail-card-title">奖项设置</h2>
-              <div class="info-description">
-                <p>🥇 <strong>一等奖（1 名）</strong>：奖金 2000 元 + 荣誉证书 + 校级奖状</p>
-                <p>🥈 <strong>二等奖（3 名）</strong>：奖金 1000 元 + 荣誉证书 + 校级奖状</p>
-                <p>🥉 <strong>三等奖（6 名）</strong>：奖金 500 元 + 荣誉证书 + 校级奖状</p>
-                <p>🏅 <strong>优秀奖（10 名）</strong>：精美礼品 + 荣誉证书</p>
-                <br>
-                <p>所有参赛选手均可获得第二课堂学分 0.5 分，表现优异者另可获得额外的创新创业学分。</p>
-              </div>
-            </div>
-
-            <!-- 赛事安排 -->
-            <div class="detail-card">
-              <h2 class="detail-card-title">赛事安排</h2>
-              <div class="info-description">
-                <p>📅 <strong>08:30 - 09:00</strong>：选手签到</p>
-                <p>📅 <strong>09:00 - 09:30</strong>：开幕式及赛前说明</p>
-                <p>📅 <strong>09:30 - 14:30</strong>：正式比赛（5 小时）</p>
-                <p>📅 <strong>14:30 - 15:30</strong>：裁判评分</p>
-                <p>📅 <strong>15:30 - 16:30</strong>：闭幕式及颁奖典礼</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- 右侧侧边栏 -->
-          <aside class="detail-sidebar">
-            <!-- 报名卡片 -->
-            <div class="sidebar-card">
-              <button class="register-btn">立即报名</button>
-            </div>
-            
-            <!-- 收藏卡片 -->
-            <div class="sidebar-card">
-              <button class="detail-favorite-btn" id="detailFavoriteBtn" onclick="toggleDetailFavorite()">
-                <span class="heart-icon">🤍</span>
-                <span class="btn-text">添加收藏</span>
-              </button>
-            </div>
-
-            <!-- 二维码卡片 -->
-            <div class="sidebar-card">
-              <h3 class="sidebar-card-title">扫码关注</h3>
-              <div class="qr-placeholder">
-                <div class="qr-icon">📱</div>
-                <p>扫码加入活动群</p>
-                <p style="font-size: 12px; color: var(--text-muted);">获取最新活动资讯</p>
-              </div>
-            </div>
-
-            <!-- 联系方式 -->
-            <div class="sidebar-card">
-              <h3 class="sidebar-card-title">联系方式</h3>
-              <div class="contact-list">
-                <div class="contact-item">
-                  <span class="contact-icon">👤</span>
-                  <span>张老师（计算机学院）</span>
-                </div>
-                <div class="contact-item">
-                  <span class="contact-icon">📞</span>
-                  <span>010-12345678</span>
-                </div>
-                <div class="contact-item">
-                  <span class="contact-icon">📧</span>
-                  <span>programming@example.edu.cn</span>
-                </div>
-                <div class="contact-item">
-                  <span class="contact-icon">💬</span>
-                  <span>咨询 QQ：123456789</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- 温馨提示 -->
-            <div class="sidebar-card">
-              <h3 class="sidebar-card-title">温馨提示</h3>
-              <div class="tips-list">
-                <div class="tip-item">
-                  <span class="tip-icon">💡</span>
-                  <span>请提前 30 分钟到达比赛场地签到</span>
-                </div>
-                <div class="tip-item">
-                  <span class="tip-icon">💡</span>
-                  <span>比赛提供所有必要的编程环境</span>
-                </div>
-                <div class="tip-item">
-                  <span class="tip-icon">💡</span>
-                  <span>自备学生证或一卡通作为参赛凭证</span>
-                </div>
-                <div class="tip-item">
-                  <span class="tip-icon">💡</span>
-                  <span>比赛期间不得使用手机及网络查询</span>
-                </div>
-                <div class="tip-item">
-                  <span class="tip-icon">💡</span>
-                  <span>报名后如无法参加，请提前 3 天取消</span>
-                </div>
-              </div>
-            </div>
-          </aside>
+        <!-- 动态加载的内容区域 -->
+        <div id="detailContent">
+          <!-- 内容将通过 JavaScript 动态加载 -->
         </div>
       </div>
     </section>
@@ -201,7 +110,430 @@
     </div>
   </footer>
 
-  <!-- 引入收藏功能模块 -->
+  <!-- 引入数据文件和收藏功能模块 -->
+  <script src="data.js"></script>
   <script src="favorite.js"></script>
+  <script>
+    // 详情页管理器
+    const DetailPageManager = {
+      // 当前活动ID
+      currentActivityId: null,
+
+      // 获取URL参数
+      getUrlParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      },
+
+      // 获取活动详情数据（扩展字段）
+      getActivityDetail(id) {
+        const activity = DataUtils.getActivityById(id);
+        if (!activity) return null;
+
+        // 根据活动ID返回对应的详细数据
+        const detailData = this.getDetailDataById(id);
+
+        return {
+          ...activity,
+          ...detailData
+        };
+      },
+
+      // 根据活动类型和ID生成详细数据
+      getDetailDataById(id) {
+        const activity = DataUtils.getActivityById(id);
+        if (!activity) return {};
+
+        // 根据分类生成对应的详细内容
+        const detailTemplates = {
+          '学科竞赛': {
+            organizer: '计算机科学与技术学院、校学生会',
+            targetAudience: '全校本科生（建议大一至大三）',
+            capacity: 150,
+            contactName: '张老师（计算机学院）',
+            contactPhone: '010-12345678',
+            contactEmail: 'contest@example.edu.cn',
+            contactQQ: '123456789',
+            getDescription: (act) => `${act.title}是由计算机科学与技术学院联合校学生会共同举办的一年一度的校园学术竞赛活动。本届大赛旨在激发广大同学对程序设计的兴趣，提升编程能力和创新思维，为同学们提供一个展示才华、交流学习的平台。`,
+            getSchedule: () => `
+              <p>📅 <strong>08:30 - 09:00</strong>：选手签到</p>
+              <p>📅 <strong>09:00 - 09:30</strong>：开幕式及赛前说明</p>
+              <p>📅 <strong>09:30 - 14:30</strong>：正式比赛（5小时）</p>
+              <p>📅 <strong>14:30 - 15:30</strong>：裁判评分</p>
+              <p>📅 <strong>15:30 - 16:30</strong>：闭幕式及颁奖典礼</p>
+            `,
+            getAwards: () => `
+              <p>🥇 <strong>一等奖（1名）</strong>：奖金2000元 + 荣誉证书 + 校级奖状</p>
+              <p>🥈 <strong>二等奖（3名）</strong>：奖金1000元 + 荣誉证书 + 校级奖状</p>
+              <p>🥉 <strong>三等奖（6名）</strong>：奖金500元 + 荣誉证书 + 校级奖状</p>
+              <p>🏅 <strong>优秀奖（10名）</strong>：精美礼品 + 荣誉证书</p>
+              <br>
+              <p>所有参赛选手均可获得第二课堂学分0.5分，表现优异者另可获得额外的创新创业学分。</p>
+            `,
+            tips: [
+              '请提前30分钟到达比赛场地签到',
+              '比赛提供所有必要的编程环境',
+              '自备学生证或一卡通作为参赛凭证',
+              '比赛期间不得使用手机及网络查询',
+              '报名后如无法参加，请提前3天取消'
+            ]
+          },
+          '志愿公益': {
+            organizer: '校青年志愿者协会',
+            targetAudience: '全校师生',
+            capacity: 50,
+            contactName: '李老师（青协）',
+            contactPhone: '010-87654321',
+            contactEmail: 'volunteer@example.edu.cn',
+            contactQQ: '987654321',
+            getDescription: (act) => `${act.title}是由校青年志愿者协会组织的公益活动。我们希望通过这次活动，传递爱心，服务社会，让每一位参与者都能在实践中成长，在奉献中收获。`,
+            getSchedule: () => `
+              <p>📅 <strong>08:00 - 08:30</strong>：志愿者集合签到</p>
+              <p>📅 <strong>08:30 - 09:00</strong>：活动前培训及分工</p>
+              <p>📅 <strong>09:00 - 12:00</strong>：上午场志愿服务</p>
+              <p>📅 <strong>12:00 - 13:00</strong>：午餐休息</p>
+              <p>📅 <strong>13:00 - 17:00</strong>：下午场志愿服务</p>
+              <p>📅 <strong>17:00 - 17:30</strong>：活动总结及合影</p>
+            `,
+            getAwards: () => `
+              <p>🏅 <strong>志愿服务证书</strong>：所有完成服务的志愿者将获得校级志愿服务证书</p>
+              <p>🏅 <strong>志愿时长认证</strong>：按实际服务时长计入第二课堂学分</p>
+              <p>🏅 <strong>优秀志愿者评选</strong>：表现突出者将被评为"优秀志愿者"</p>
+              <br>
+              <p>参与志愿服务不仅能帮助他人，更能提升个人综合素质，为未来发展积累宝贵经验。</p>
+            `,
+            tips: [
+              '请穿着舒适的服装和运动鞋',
+              '活动当天请携带学生证签到',
+              '服从组织安排，认真完成分配任务',
+              '注意个人安全，有问题及时联系负责人',
+              '如遇特殊情况无法参加，请提前24小时告知'
+            ]
+          },
+          '学术讲座': {
+            organizer: '各学院学术委员会',
+            targetAudience: '对相关领域感兴趣的师生',
+            capacity: 200,
+            contactName: '王老师（学术部）',
+            contactPhone: '010-11112222',
+            contactEmail: 'lecture@example.edu.cn',
+            contactQQ: '55556666',
+            getDescription: (act) => `${act.title}是一场面向全校师生的学术交流活动。我们邀请了该领域的专家学者，为大家带来前沿的学术观点和丰富的实践经验。欢迎广大师生踊跃参加！`,
+            getSchedule: () => `
+              <p>📅 <strong>18:30 - 19:00</strong>：入场签到</p>
+              <p>📅 <strong>19:00 - 19:10</strong>：主持人开场介绍</p>
+              <p>📅 <strong>19:10 - 20:30</strong>：主讲嘉宾演讲</p>
+              <p>📅 <strong>20:30 - 21:00</strong>：互动问答环节</p>
+              <p>📅 <strong>21:00 - 21:15</strong>：总结及合影</p>
+            `,
+            getAwards: () => `
+              <p>📜 <strong>学术参与证明</strong>：所有到场听众可获得学术活动参与证明</p>
+              <p>📜 <strong>第二课堂学分</strong>：参与讲座可获得0.2个第二课堂学分</p>
+              <p>🎁 <strong>互动礼品</strong>：积极参与问答的同学有机会获得精美礼品</p>
+            `,
+            tips: [
+              '请提前10分钟到达会场',
+              '讲座期间请将手机调至静音模式',
+              '欢迎积极提问，与嘉宾互动交流',
+              '可以准备纸笔记录重点内容',
+              '座位有限，建议提前到场'
+            ]
+          },
+          '社团文体': {
+            organizer: '校团委、各学生社团',
+            targetAudience: '全校师生',
+            capacity: 100,
+            contactName: '陈老师（社团联）',
+            contactPhone: '010-33334444',
+            contactEmail: 'club@example.edu.cn',
+            contactQQ: '77778888',
+            getDescription: (act) => `${act.title}是由校团委和各学生社团联合举办的文体活动。这是一个展示才华、结交朋友的绝佳平台，无论你是参与者还是观众，都能在这里感受到青春的活力和社团的魅力！`,
+            getSchedule: () => `
+              <p>📅 <strong>14:00 - 14:30</strong>：入场及签到</p>
+              <p>📅 <strong>14:30 - 14:45</strong>：开场表演</p>
+              <p>📅 <strong>14:45 - 17:00</strong>：主体活动</p>
+              <p>📅 <strong>17:00 - 17:30</strong>：颁奖/总结环节</p>
+              <p>📅 <strong>17:30 - 18:00</strong>：自由交流及合影</p>
+            `,
+            getAwards: () => `
+              <p>🏆 <strong>参与奖</strong>：所有参与者均可获得精美纪念品一份</p>
+              <p>🏆 <strong>优胜奖</strong>：比赛类活动设有冠亚季军奖项</p>
+              <p>🏆 <strong>最佳风采奖</strong>：评选最佳表现个人或团队</p>
+              <p>📜 <strong>活动证明</strong>：参与者可获得社团活动参与证明</p>
+            `,
+            tips: [
+              '请根据活动类型穿着合适的服装',
+              '建议提前到场选择最佳位置',
+              '遵守活动现场秩序',
+              '可以邀请朋友一起参加',
+              '注意保管好个人物品'
+            ]
+          },
+          '招聘宣讲': {
+            organizer: '就业指导中心、各企业HR',
+            targetAudience: '应届毕业生及有求职意向的同学',
+            capacity: 300,
+            contactName: '赵老师（就业中心）',
+            contactPhone: '010-99990000',
+            contactEmail: 'career@example.edu.cn',
+            contactQQ: '111122223',
+            getDescription: (act) => `${act.title}是由就业指导中心联合知名企业举办的校园招聘活动。企业HR将详细介绍公司文化、岗位需求、薪酬福利等信息，为同学们提供宝贵的求职机会。欢迎有求职意向的同学积极参加！`,
+            getSchedule: () => `
+              <p>📅 <strong>13:30 - 14:00</strong>：入场签到</p>
+              <p>📅 <strong>14:00 - 14:10</strong>：企业宣传片播放</p>
+              <p>📅 <strong>14:10 - 15:00</strong>：企业介绍及岗位说明</p>
+              <p>📅 <strong>15:00 - 15:30</strong>：校友分享环节</p>
+              <p>📅 <strong>15:30 - 16:30</strong>：现场答疑及简历投递</p>
+              <p>📅 <strong>16:30 - 17:30</strong>：现场面试（部分岗位）</p>
+            `,
+            getAwards: () => `
+              <p>💼 <strong>面试直通卡</strong>：现场投递简历可获得优先面试机会</p>
+              <p>🎁 <strong>企业周边</strong>：参与互动可获得企业定制礼品</p>
+              <p>📚 <strong>求职资料</strong>：免费领取求职指南和面试技巧手册</p>
+            `,
+            tips: [
+              '请携带多份简历现场投递',
+              '建议穿着正式，给HR留下好印象',
+              '提前了解企业背景和岗位需求',
+              '准备好自我介绍和常见问题回答',
+              '可以准备笔记本记录重要信息'
+            ]
+          }
+        };
+
+        const template = detailTemplates[activity.tag];
+        if (!template) return {};
+
+        return {
+          organizer: template.organizer,
+          targetAudience: template.targetAudience,
+          capacity: template.capacity,
+          contactName: template.contactName,
+          contactPhone: template.contactPhone,
+          contactEmail: template.contactEmail,
+          contactQQ: template.contactQQ,
+          description: template.getDescription(activity),
+          schedule: template.getSchedule(),
+          awards: template.getAwards(),
+          tips: template.tips
+        };
+      },
+
+      // 渲染详情页
+      renderDetailPage() {
+        const id = this.getUrlParam('id');
+
+        if (!id) {
+          this.renderError('缺少活动ID', '请从活动列表选择一个活动查看详情。');
+          return;
+        }
+
+        this.currentActivityId = parseInt(id);
+        const activity = this.getActivityDetail(this.currentActivityId);
+
+        if (!activity) {
+          this.renderError('活动不存在', '抱歉，您查找的活动不存在或已被删除。');
+          return;
+        }
+
+        // 更新页面标题
+        document.getElementById('pageTitle').textContent = `${activity.title} - 青途校园 YCHub`;
+
+        // 渲染页面内容
+        const contentHtml = this.generateDetailHtml(activity);
+        document.getElementById('detailContent').innerHTML = contentHtml;
+
+        // 初始化收藏按钮状态
+        this.initFavoriteButton();
+      },
+
+      // 生成详情页HTML
+      generateDetailHtml(activity) {
+        const isFav = FavoriteManager.isFavorited(activity.id);
+
+        return `
+          <!-- 返回按钮 -->
+          <button class="back-button" onclick="history.back()" title="返回">
+            <span class="back-icon">‹</span>
+          </button>
+
+          <!-- 活动头部 -->
+          <header class="detail-header">
+            <h1 class="detail-title">${activity.title}</h1>
+          </header>
+
+          <!-- 详情布局 -->
+          <div class="detail-layout">
+            <!-- 左侧主要内容 -->
+            <div class="detail-main">
+              <!-- 活动信息卡片 -->
+              <div class="detail-card">
+                <h2 class="detail-card-title">活动信息</h2>
+                <div class="info-grid">
+                  <div class="info-item">
+                    <span class="info-label">主办单位</span>
+                    <span class="info-value">${activity.organizer}</span>
+                  </div>
+                  <div class="info-item">
+                    <span class="info-label">活动时间</span>
+                    <span class="info-value">${activity.date}</span>
+                  </div>
+                  <div class="info-item">
+                    <span class="info-label">活动地点</span>
+                    <span class="info-value">${activity.location}</span>
+                  </div>
+                  <div class="info-item">
+                    <span class="info-label">参与对象</span>
+                    <span class="info-value">${activity.targetAudience}</span>
+                  </div>
+                  <div class="info-item">
+                    <span class="info-label">报名截止</span>
+                    <span class="info-value" style="color: var(--accent-color);">${activity.deadline}</span>
+                  </div>
+                  <div class="info-item">
+                    <span class="info-label">活动容量</span>
+                    <span class="info-value">${activity.capacity}人（已报名${activity.participants}人）</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 活动简介 -->
+              <div class="detail-card">
+                <h2 class="detail-card-title">活动简介</h2>
+                <div class="info-description">
+                  <p>${activity.description}</p>
+                </div>
+              </div>
+
+              <!-- 奖项设置 -->
+              <div class="detail-card">
+                <h2 class="detail-card-title">奖项设置</h2>
+                <div class="info-description">
+                  ${activity.awards}
+                </div>
+              </div>
+
+              <!-- 活动安排 -->
+              <div class="detail-card">
+                <h2 class="detail-card-title">活动安排</h2>
+                <div class="info-description">
+                  ${activity.schedule}
+                </div>
+              </div>
+            </div>
+
+            <!-- 右侧侧边栏 -->
+            <aside class="detail-sidebar">
+              <!-- 报名卡片 -->
+              <div class="sidebar-card">
+                <button class="register-btn">立即报名</button>
+              </div>
+
+              <!-- 收藏卡片 -->
+              <div class="sidebar-card">
+                <button class="detail-favorite-btn ${isFav ? 'favorited' : ''}" id="detailFavoriteBtn" onclick="DetailPageManager.toggleFavorite()">
+                  <span class="heart-icon">${isFav ? '❤️' : '🤍'}</span>
+                  <span class="btn-text">${isFav ? '已收藏' : '添加收藏'}</span>
+                </button>
+              </div>
+
+              <!-- 二维码卡片 -->
+              <div class="sidebar-card">
+                <h3 class="sidebar-card-title">扫码关注</h3>
+                <div class="qr-placeholder">
+                  <div class="qr-icon">📱</div>
+                  <p>扫码加入活动群</p>
+                  <p style="font-size: 12px; color: var(--text-muted);">获取最新活动资讯</p>
+                </div>
+              </div>
+
+              <!-- 联系方式 -->
+              <div class="sidebar-card">
+                <h3 class="sidebar-card-title">联系方式</h3>
+                <div class="contact-list">
+                  <div class="contact-item">
+                    <span class="contact-icon">👤</span>
+                    <span>${activity.contactName}</span>
+                  </div>
+                  <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <span>${activity.contactPhone}</span>
+                  </div>
+                  <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span>${activity.contactEmail}</span>
+                  </div>
+                  <div class="contact-item">
+                    <span class="contact-icon">💬</span>
+                    <span>咨询QQ：${activity.contactQQ}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 温馨提示 -->
+              <div class="sidebar-card">
+                <h3 class="sidebar-card-title">温馨提示</h3>
+                <div class="tips-list">
+                  ${activity.tips.map(tip => `
+                    <div class="tip-item">
+                      <span class="tip-icon">💡</span>
+                      <span>${tip}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </aside>
+          </div>
+        `;
+      },
+
+      // 渲染错误页面
+      renderError(title, message) {
+        document.getElementById('detailContent').innerHTML = `
+          <div class="error-message">
+            <h2>${title}</h2>
+            <p>${message}</p>
+            <a href="index.html" class="btn-primary">返回首页</a>
+          </div>
+        `;
+      },
+
+      // 初始化收藏按钮
+      initFavoriteButton() {
+        // 收藏按钮状态已在 generateDetailHtml 中设置
+        // 这里可以添加额外的初始化逻辑
+      },
+
+      // 切换收藏状态
+      toggleFavorite() {
+        if (!this.currentActivityId) return;
+
+        const isFav = FavoriteManager.toggleFavorite(this.currentActivityId);
+        const btn = document.getElementById('detailFavoriteBtn');
+        const heartIcon = btn.querySelector('.heart-icon');
+        const btnText = btn.querySelector('.btn-text');
+
+        if (isFav) {
+          btn.classList.add('favorited');
+          heartIcon.textContent = '❤️';
+          btnText.textContent = '已收藏';
+          showToast('已添加到收藏');
+        } else {
+          btn.classList.remove('favorited');
+          heartIcon.textContent = '🤍';
+          btnText.textContent = '添加收藏';
+          showToast('已取消收藏');
+        }
+
+        // 更新导航栏收藏数量
+        updateFavoriteBadge();
+      }
+    };
+
+    // 页面加载完成后初始化
+    document.addEventListener('DOMContentLoaded', function() {
+      DetailPageManager.renderDetailPage();
+    });
+  </script>
 </body>
 </html>
