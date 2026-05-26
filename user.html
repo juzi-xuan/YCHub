@@ -419,71 +419,11 @@
 
   <!-- 引入公共数据文件 -->
   <script src="data.js"></script>
+  <!-- 引入收藏功能模块 -->
+  <script src="favorite.js"></script>
 
-  <!-- ============================================
-       收藏功能逻辑
-       ============================================ -->
   <script>
-    // 收藏功能命名空间
-    const FavoriteManager = {
-      STORAGE_KEY: 'ychub_favorites',
-      
-      // 获取所有收藏的活动ID
-      getFavorites() {
-        const favorites = localStorage.getItem(this.STORAGE_KEY);
-        return favorites ? JSON.parse(favorites) : [];
-      },
-      
-      // 保存收藏列表
-      saveFavorites(favorites) {
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(favorites));
-      },
-      
-      // 添加收藏
-      addFavorite(activityId) {
-        const favorites = this.getFavorites();
-        if (!favorites.includes(activityId)) {
-          favorites.push(activityId);
-          this.saveFavorites(favorites);
-        }
-      },
-      
-      // 取消收藏
-      removeFavorite(activityId) {
-        const favorites = this.getFavorites();
-        const index = favorites.indexOf(activityId);
-        if (index > -1) {
-          favorites.splice(index, 1);
-          this.saveFavorites(favorites);
-        }
-      },
-      
-      // 切换收藏状态
-      toggleFavorite(activityId) {
-        const favorites = this.getFavorites();
-        if (favorites.includes(activityId)) {
-          this.removeFavorite(activityId);
-          return false;
-        } else {
-          this.addFavorite(activityId);
-          return true;
-        }
-      },
-      
-      // 检查是否已收藏
-      isFavorited(activityId) {
-        const favorites = this.getFavorites();
-        return favorites.includes(activityId);
-      },
-      
-      // 获取收藏数量
-      getFavoriteCount() {
-        return this.getFavorites().length;
-      }
-    };
-
     // 活动数据来自 data.js
-    // allActivities 现在引用 data.js 中的 activitiesData
     const allActivities = activitiesData;
 
     // 当前显示的板块
@@ -492,7 +432,7 @@
     // 显示指定板块
     function showSection(section) {
       currentSection = section;
-      
+
       // 更新菜单卡片选中状态
       document.querySelectorAll('.menu-card').forEach(card => {
         card.classList.remove('active');
@@ -500,13 +440,13 @@
           card.classList.add('active');
         }
       });
-      
+
       // 隐藏所有板块
       document.getElementById('enrolledSection').style.display = 'none';
       document.getElementById('favoritesSection').style.display = 'none';
       document.getElementById('historySection').style.display = 'none';
       document.getElementById('creditsSection').style.display = 'none';
-      
+
       // 显示指定板块
       if (section === 'enrolled') {
         document.getElementById('enrolledSection').style.display = 'block';
@@ -518,7 +458,7 @@
       } else if (section === 'credits') {
         document.getElementById('creditsSection').style.display = 'block';
       }
-      
+
       // 滚动到内容区域
       document.querySelector('.user-menu').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -528,22 +468,22 @@
       const favoritesGrid = document.getElementById('favoritesGrid');
       const favoritesEmpty = document.getElementById('favoritesEmpty');
       const favoriteIds = FavoriteManager.getFavorites();
-      
+
       // 更新徽章数量
       document.getElementById('favoriteBadge').textContent = favoriteIds.length;
-      
+
       if (favoriteIds.length === 0) {
         favoritesGrid.style.display = 'none';
         favoritesEmpty.style.display = 'block';
         return;
       }
-      
+
       favoritesGrid.style.display = 'grid';
       favoritesEmpty.style.display = 'none';
-      
+
       // 获取收藏的活动数据
       const favoriteActivities = allActivities.filter(activity => favoriteIds.includes(activity.id));
-      
+
       // 生成收藏卡片HTML
       favoritesGrid.innerHTML = favoriteActivities.map(activity => `
         <div class="card activity-card" data-id="${activity.id}">
@@ -575,40 +515,10 @@
       `).join('');
     }
 
-    // 从收藏列表中移除
-    function removeFavoriteFromList(event, activityId) {
-      event.preventDefault();
-      event.stopPropagation();
-      
-      FavoriteManager.removeFavorite(activityId);
-      showToast('已取消收藏 🤍');
-      renderFavorites();
-    }
-
-    // 显示提示消息
-    function showToast(message) {
-      const existingToast = document.querySelector('.favorite-toast');
-      if (existingToast) {
-        existingToast.remove();
-      }
-      
-      const toast = document.createElement('div');
-      toast.className = 'favorite-toast';
-      toast.textContent = message;
-      document.body.appendChild(toast);
-      
-      setTimeout(() => toast.classList.add('show'), 10);
-      
-      setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
-      }, 2000);
-    }
-
     // 页面加载时初始化
     document.addEventListener('DOMContentLoaded', function() {
       // 更新收藏徽章
-      document.getElementById('favoriteBadge').textContent = FavoriteManager.getFavoriteCount();
+      updateFavoriteBadge();
     });
   </script>
 </body>

@@ -918,6 +918,8 @@
 
   <!-- 引入公共数据文件 -->
   <script src="data.js"></script>
+  <!-- 引入收藏功能模块 -->
+  <script src="favorite.js"></script>
 
   <!-- ============================================
        搜索功能逻辑
@@ -925,44 +927,6 @@
   <script>
     (function() {
       /* ===== 活动数据来自 data.js ===== */
-        { id: 1, title: '第18届程序设计大赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'programming-contest.jpg', date: '2026-06-15 09:00', location: '实验楼 301 机房', participants: 128, description: '展示编程才华，与全校高手同台竞技' },
-        { id: 2, title: '校园环保志愿行动', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'environmental-action.jpg', date: '2026-06-20 14:00', location: '校园广场', participants: 156, description: '用行动守护绿色校园，共建美好环境' },
-        { id: 3, title: 'AI技术前沿讲座', tag: '学术讲座', tagClass: 'tag-lecture', image: 'ai-lecture.jpg', date: '2026-06-18 19:00', location: '图书馆报告厅', participants: 234, description: '探索人工智能的未来发展趋势' },
-        { id: 4, title: '校园篮球联赛', tag: '社团文体', tagClass: 'tag-sports', image: 'basketball-league.jpg', date: '2026-06-22 16:00', location: '体育馆', participants: 89, description: '热血青春，挥洒汗水，为荣誉而战' },
-        { id: 5, title: '创新创业大赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'innovation-contest.jpg', date: '2026-06-10 09:00', location: '大学生活动中心', participants: 156, description: '点燃创业梦想，实现创新价值' },
-        { id: 6, title: '公益支教志愿者招募', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'volunteer-recruitment.jpg', date: '2026-06-28 08:00', location: '希望小学', participants: 45, description: '用知识点亮希望，用爱心温暖童心' },
-        { id: 7, title: '网络安全技能大赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'cybersecurity-contest.jpg', date: '2026-06-25 13:00', location: '信工楼 401', participants: 89, description: '守护网络安全，锤炼技术实力' },
-        { id: 8, title: '电子设计竞赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'electronic-design.jpg', date: '2026-06-12 08:00', location: '电子实验楼', participants: 95, description: '创新电子设计，展现工程魅力' },
-        { id: 9, title: '工程训练综合能力竞赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'engineering-training.jpg', date: '2026-06-22 10:00', location: '工程训练中心', participants: 64, description: '综合实践能力的大比拼' },
-        { id: 10, title: '工业设计大赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'industrial-design.jpg', date: '2026-06-28 09:00', location: '艺术学院展厅', participants: 53, description: '创意与美的完美结合' },
-        { id: 11, title: '移动应用创新赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'mobile-app-contest.jpg', date: '2026-07-01 14:00', location: '软件学院报告厅', participants: 78, description: '移动时代，创意无限' },
-        { id: 12, title: '大学生物理竞赛', tag: '学科竞赛', tagClass: 'tag-competition', image: 'physics-contest.jpg', date: '2026-06-18 14:00', location: '物理实验楼', participants: 72, description: '探索物理奥秘，激发科学兴趣' },
-        { id: 13, title: '社区关爱老人活动', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'elderly-care.jpg', date: '2026-06-22 09:00', location: '阳光社区', participants: 89, description: '关爱老人，传递温暖' },
-        { id: 14, title: '图书馆整理志愿者', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'library-volunteer.jpg', date: '2026-06-25 14:00', location: '校图书馆', participants: 67, description: '整理图书，服务师生' },
-        { id: 15, title: '义务支教活动', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'teaching-volunteer.jpg', date: '2026-06-28 08:00', location: '希望小学', participants: 45, description: '用知识点亮希望' },
-        { id: 16, title: '爱心献血活动', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'blood-donation.jpg', date: '2026-07-01 09:00', location: '校医院', participants: 234, description: '无偿献血，传递爱心' },
-        { id: 17, title: '校园导览志愿者', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'campus-guide.jpg', date: '2026-07-05 08:00', location: '校门口', participants: 56, description: '引导新生，展示校园' },
-        { id: 18, title: '动物保护宣传', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'animal-protection.jpg', date: '2026-07-08 14:00', location: '生态园', participants: 78, description: '保护动物，人人有责' },
-        { id: 19, title: '垃圾分类宣传', tag: '志愿公益', tagClass: 'tag-volunteer', image: 'recycling.jpg', date: '2026-07-10 10:00', location: '各宿舍楼', participants: 123, description: '垃圾分类，从我做起' },
-        { id: 20, title: '量子计算入门讲座', tag: '学术讲座', tagClass: 'tag-lecture', image: 'quantum-lecture.jpg', date: '2026-06-20 14:00', location: '理学院报告厅', participants: 189, description: '探索量子计算的奥秘' },
-        { id: 21, title: '区块链技术应用', tag: '学术讲座', tagClass: 'tag-lecture', image: 'blockchain-lecture.jpg', date: '2026-06-22 19:00', location: '计算机学院', participants: 156, description: '了解区块链技术的应用前景' },
-        { id: 22, title: '新能源技术发展', tag: '学术讲座', tagClass: 'tag-lecture', image: 'energy-lecture.jpg', date: '2026-06-25 14:00', location: '能源学院', participants: 134, description: '新能源技术的发展趋势' },
-        { id: 23, title: '心理学与生活', tag: '学术讲座', tagClass: 'tag-lecture', image: 'psychology-lecture.jpg', date: '2026-06-28 19:00', location: '心理学院', participants: 267, description: '心理学在日常生活中的应用' },
-        { id: 24, title: '金融投资基础', tag: '学术讲座', tagClass: 'tag-lecture', image: 'finance-lecture.jpg', date: '2026-07-01 14:00', location: '经管学院', participants: 198, description: '学习金融投资的基础知识' },
-        { id: 25, title: '创新创业分享会', tag: '学术讲座', tagClass: 'tag-lecture', image: 'startup-lecture.jpg', date: '2026-07-05 19:00', location: '创业中心', participants: 145, description: '创业经验分享与交流' },
-        { id: 26, title: '大数据时代机遇', tag: '学术讲座', tagClass: 'tag-lecture', image: 'bigdata-lecture.jpg', date: '2026-07-08 14:00', location: '数据学院', participants: 176, description: '大数据时代的机遇与挑战' },
-        { id: 27, title: '校园歌手大赛', tag: '社团文体', tagClass: 'tag-sports', image: 'singer-contest.jpg', date: '2026-06-22 18:30', location: '大礼堂', participants: 89, description: '唱响青春，展示才华' },
-        { id: 28, title: '篮球友谊赛', tag: '社团文体', tagClass: 'tag-sports', image: 'basketball.jpg', date: '2026-06-25 16:00', location: '体育馆', participants: 156, description: '以球会友，增进友谊' },
-        { id: 29, title: '舞蹈社团展演', tag: '社团文体', tagClass: 'tag-sports', image: 'dance-show.jpg', date: '2026-06-28 19:00', location: '学生活动中心', participants: 234, description: '舞动青春，绽放光彩' },
-        { id: 30, title: '摄影作品展', tag: '社团文体', tagClass: 'tag-sports', image: 'photo-exhibition.jpg', date: '2026-07-01 09:00', location: '艺术展厅', participants: 78, description: '用镜头记录美好瞬间' },
-        { id: 31, title: '话剧社年度大戏', tag: '社团文体', tagClass: 'tag-sports', image: 'drama-show.jpg', date: '2026-07-05 19:00', location: '剧场', participants: 189, description: '戏剧人生，精彩演绎' },
-        { id: 32, title: '羽毛球比赛', tag: '社团文体', tagClass: 'tag-sports', image: 'badminton.jpg', date: '2026-07-08 14:00', location: '羽毛球馆', participants: 134, description: '轻羽飞扬，激情对决' },
-        { id: 33, title: '书法社团展览', tag: '社团文体', tagClass: 'tag-sports', image: 'calligraphy.jpg', date: '2026-07-10 09:00', location: '图书馆大厅', participants: 67, description: '翰墨飘香，传承文化' },
-        { id: 34, title: '音乐节', tag: '社团文体', tagClass: 'tag-sports', image: 'music-festival.jpg', date: '2026-07-12 18:00', location: '操场', participants: 456, description: '音乐狂欢，青春飞扬' },
-        { id: 35, title: '腾讯校园招聘宣讲会', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'tencent-recruit.jpg', date: '2026-06-25 14:00', location: '就业中心', participants: 312, description: '腾讯校园招聘宣讲' },
-        { id: 36, title: '阿里巴巴校招宣讲', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'alibaba-recruit.jpg', date: '2026-06-28 14:00', location: '报告厅', participants: 289, description: '阿里巴巴校园招聘' },
-        { id: 37, title: '字节跳动招聘专场', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'bytedance-recruit.jpg', date: '2026-07-01 14:00', location: '计算机学院', participants: 267, description: '字节跳动校园招聘' },
-        { id: 38, title: '华为校园招聘', tag: '招聘宣讲', tagClass: 'tag-recruitment', image: 'huawei-recruit.jpg', date: '2026-07-05 14:00', location: '就业中心', participants: 345, description: '华为校园招聘宣讲' },
       /* ===== DOM元素 ===== */
       const searchInput = document.getElementById('searchInput');
       const searchBtn = document.getElementById('searchBtn');
@@ -1160,134 +1124,6 @@
     })();
   </script>
 
-  <!-- ============================================
-       收藏功能逻辑
-       ============================================ -->
-  <script>
-    // 收藏功能命名空间
-    const FavoriteManager = {
-      STORAGE_KEY: 'ychub_favorites',
-      
-      // 获取所有收藏的活动ID
-      getFavorites() {
-        const favorites = localStorage.getItem(this.STORAGE_KEY);
-        return favorites ? JSON.parse(favorites) : [];
-      },
-      
-      // 保存收藏列表
-      saveFavorites(favorites) {
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(favorites));
-      },
-      
-      // 添加收藏
-      addFavorite(activityId) {
-        const favorites = this.getFavorites();
-        if (!favorites.includes(activityId)) {
-          favorites.push(activityId);
-          this.saveFavorites(favorites);
-        }
-      },
-      
-      // 取消收藏
-      removeFavorite(activityId) {
-        const favorites = this.getFavorites();
-        const index = favorites.indexOf(activityId);
-        if (index > -1) {
-          favorites.splice(index, 1);
-          this.saveFavorites(favorites);
-        }
-      },
-      
-      // 切换收藏状态
-      toggleFavorite(activityId) {
-        const favorites = this.getFavorites();
-        if (favorites.includes(activityId)) {
-          this.removeFavorite(activityId);
-          return false;
-        } else {
-          this.addFavorite(activityId);
-          return true;
-        }
-      },
-      
-      // 检查是否已收藏
-      isFavorited(activityId) {
-        const favorites = this.getFavorites();
-        return favorites.includes(activityId);
-      },
-      
-      // 获取收藏数量
-      getFavoriteCount() {
-        return this.getFavorites().length;
-      }
-    };
-    
-    // 全局函数：检查活动是否已收藏
-    function isActivityFavorited(activityId) {
-      return FavoriteManager.isFavorited(activityId);
-    }
-    
-    // 全局函数：切换收藏状态
-    function toggleFavorite(event, activityId) {
-      event.preventDefault();
-      event.stopPropagation();
-      
-      const isFavorited = FavoriteManager.toggleFavorite(activityId);
-      const btn = event.currentTarget;
-      const heartIcon = btn.querySelector('.heart-icon');
-      
-      // 更新按钮状态
-      if (isFavorited) {
-        btn.classList.add('favorited');
-        heartIcon.textContent = '❤️';
-        btn.title = '取消收藏';
-        showToast('已添加到收藏 ❤️');
-      } else {
-        btn.classList.remove('favorited');
-        heartIcon.textContent = '🤍';
-        btn.title = '添加收藏';
-        showToast('已取消收藏 🤍');
-      }
-      
-      // 更新个人中心收藏数量（如果页面中有显示）
-      updateFavoriteBadge();
-    }
-    
-    // 显示提示消息
-    function showToast(message) {
-      // 移除已有的toast
-      const existingToast = document.querySelector('.favorite-toast');
-      if (existingToast) {
-        existingToast.remove();
-      }
-      
-      // 创建新的toast
-      const toast = document.createElement('div');
-      toast.className = 'favorite-toast';
-      toast.textContent = message;
-      document.body.appendChild(toast);
-      
-      // 显示动画
-      setTimeout(() => toast.classList.add('show'), 10);
-      
-      // 3秒后隐藏
-      setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
-      }, 2000);
-    }
-    
-    // 更新收藏数量徽章
-    function updateFavoriteBadge() {
-      const count = FavoriteManager.getFavoriteCount();
-      // 这里可以更新页面上的收藏数量显示
-      // 例如：document.querySelector('.favorite-count').textContent = count;
-    }
-    
-    // 页面加载时初始化
-    document.addEventListener('DOMContentLoaded', function() {
-      updateFavoriteBadge();
-    });
-  </script>
+  <!-- 收藏功能已通过 favorite.js 引入 -->
 </body>
 </html>
