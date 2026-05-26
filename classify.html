@@ -55,15 +55,15 @@
             <!-- 列表头部 -->
             <div class="content-header">
               <div>
-                <h2 class="content-title">
+                <h2 class="content-title" id="contentTitle">
                   全部活动
-                  <span class="content-count">共 86 个活动</span>
+                  <span class="content-count" id="contentCount">共 40 个活动</span>
                 </h2>
               </div>
               <div class="sort-options">
-                <span class="sort-item active">最新发布</span>
-                <span class="sort-item">报名即将截止</span>
-                <span class="sort-item">热度最高</span>
+                <span class="sort-item active" data-sort="latest">最新发布</span>
+                <span class="sort-item" data-sort="deadline">报名即将截止</span>
+                <span class="sort-item" data-sort="hot">热度最高</span>
               </div>
             </div>
 
@@ -255,14 +255,8 @@
             </div>
 
             <!-- 分页 -->
-            <nav class="pagination">
-              <span class="pagination-item disabled">上一页</span>
-              <span class="pagination-item active">1</span>
-              <span class="pagination-item">2</span>
-              <span class="pagination-item">3</span>
-              <span class="pagination-ellipsis">...</span>
-              <span class="pagination-item">10</span>
-              <span class="pagination-item">下一页</span>
+            <nav class="pagination" id="pagination">
+              <!-- 分页内容由JS动态生成 -->
             </nav>
           </div>
         </div>
@@ -283,49 +277,119 @@
   <script src="favorite.js"></script>
 
   <script>
-    // 分类数据配置 - 现在使用 data.js 中的数据
-    const categoryData = {
-      '全部活动': {
-        count: DataUtils.getCategoryCount('全部活动'),
-        activities: DataUtils.getActivitiesByCategory('全部活动')
-      },
-      '学科竞赛': {
-        count: DataUtils.getCategoryCount('学科竞赛'),
-        activities: DataUtils.getActivitiesByCategory('学科竞赛')
-      },
-      '志愿公益': {
-        count: DataUtils.getCategoryCount('志愿公益'),
-        activities: DataUtils.getActivitiesByCategory('志愿公益')
-      },
-      '学术讲座': {
-        count: DataUtils.getCategoryCount('学术讲座'),
-        activities: DataUtils.getActivitiesByCategory('学术讲座')
-      },
-      '社团文体': {
-        count: DataUtils.getCategoryCount('社团文体'),
-        activities: DataUtils.getActivitiesByCategory('社团文体')
-      },
-      '招聘宣讲': {
-        count: DataUtils.getCategoryCount('招聘宣讲'),
-        activities: DataUtils.getActivitiesByCategory('招聘宣讲')
-      }
-    };
+    // ==================== 配置 ====================
+    const ITEMS_PER_PAGE = 8; // 每页显示8个活动
 
-    // 获取DOM元素
+    // ==================== 状态管理 ====================
+    let currentCategory = '全部活动';
+    let currentSort = 'latest';
+    let currentPage = 1;
+    let currentActivities = [];
+
+    // ==================== DOM元素 ====================
     const sidebarItems = document.querySelectorAll('.sidebar-item');
     const contentTitle = document.querySelector('.content-title');
     const activityList = document.querySelector('.activity-list');
+    const sortItems = document.querySelectorAll('.sort-item');
+    const paginationEl = document.getElementById('pagination');
 
+    // ==================== 工具函数 ====================
     // 获取活动ID - 使用 data.js 中的统一ID
     function getActivityId(activity) {
       return activity.id;
     }
-    
-    // 生成活动卡片HTML
+
+    // 解析日期字符串为时间戳
+    function parseDate(dateStr) {
+      return new Date(dateStr).getTime();
+    }
+
+    // ==================== 排序功能 ====================
+    // 排序函数
+    function sortActivities(activities, sortType) {
+      const sorted = [...activities];
+
+      switch (sortType) {
+        case 'latest':
+          // 最新发布 - 按活动日期降序
+          sorted.sort((a, b) => parseDate(b.date) - parseDate(a.date));
+          break;
+        case 'deadline':
+          // 报名即将截止 - 按报名截止日期升序（越早截止越靠前）
+          sorted.sort((a, b) => parseDate(a.deadline) - parseDate(b.deadline));
+          break;
+        case 'hot':
+          // 热度最高 - 按报名人数降序
+          sorted.sort((a, b) => b.participants - a.participants);
+          break;
+      }
+
+      return sorted;
+    }
+
+    // ==================== 分页功能 ====================
+    // 获取当前页的活动
+    function getPageActivities(activities, page) {
+      const start = (page - 1) * ITEMS_PER_PAGE;
+      const end = start + ITEMS_PER_PAGE;
+      return activities.slice(start, end);
+    }
+
+    // 获取总页数
+    function getTotalPages(activities) {
+      return Math.ceil(activities.length / ITEMS_PER_PAGE);
+    }
+
+    // 生成分页HTML
+    function generatePagination(totalPages, currentPage) {
+      if (totalPages <= 1) return '';
+
+      let html = '';
+
+      // 上一页按钮
+      html += `<span class="pagination-item ${currentPage === 1 ? 'disabled' : ''}" data-page="${currentPage - 1}">上一页</span>`;
+
+      // 页码按钮
+      const maxVisiblePages = 5;
+      let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+      let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+      if (endPage - startPage < maxVisiblePages - 1) {
+        startPage = Math.max(1, endPage - maxVisiblePages + 1);
+      }
+
+      // 第一页
+      if (startPage > 1) {
+        html += `<span class="pagination-item ${1 === currentPage ? 'active' : ''}" data-page="1">1</span>`;
+        if (startPage > 2) {
+          html += `<span class="pagination-ellipsis">...</span>`;
+        }
+      }
+
+      // 中间页码
+      for (let i = startPage; i <= endPage; i++) {
+        html += `<span class="pagination-item ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</span>`;
+      }
+
+      // 最后一页
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+          html += `<span class="pagination-ellipsis">...</span>`;
+        }
+        html += `<span class="pagination-item ${totalPages === currentPage ? 'active' : ''}" data-page="${totalPages}">${totalPages}</span>`;
+      }
+
+      // 下一页按钮
+      html += `<span class="pagination-item ${currentPage === totalPages ? 'disabled' : ''}" data-page="${currentPage + 1}">下一页</span>`;
+
+      return html;
+    }
+
+    // ==================== 活动卡片生成 ====================
     function generateActivityCard(activity) {
       const activityId = getActivityId(activity);
       const isFavorited = isActivityFavorited(activityId);
-      
+
       return `
         <div class="card activity-card" data-id="${activityId}">
           <button class="favorite-btn ${isFavorited ? 'favorited' : ''}" data-id="${activityId}" onclick="toggleFavorite(event, ${activityId})" title="${isFavorited ? '取消收藏' : '添加收藏'}">
@@ -360,39 +424,105 @@
       `;
     }
 
-    // 更新活动列表
-    function updateActivityList(categoryName) {
-      const data = categoryData[categoryName];
-      if (!data) return;
+    // ==================== 更新活动列表 ====================
+    function updateActivityList() {
+      // 获取当前分类的活动
+      let activities = DataUtils.getActivitiesByCategory(currentCategory);
+
+      // 保存当前活动列表（用于分页）
+      currentActivities = activities;
+
+      // 排序
+      const sortedActivities = sortActivities(activities, currentSort);
+
+      // 分页
+      const totalPages = getTotalPages(sortedActivities);
+      const pageActivities = getPageActivities(sortedActivities, currentPage);
 
       // 更新标题
+      const count = activities.length;
       contentTitle.innerHTML = `
-        ${categoryName}
-        <span class="content-count">共 ${data.count} 个活动</span>
+        ${currentCategory}
+        <span class="content-count">共 ${count} 个活动</span>
       `;
 
       // 更新活动列表
-      activityList.innerHTML = data.activities.map(generateActivityCard).join('');
+      if (pageActivities.length > 0) {
+        activityList.innerHTML = pageActivities.map(generateActivityCard).join('');
+      } else {
+        activityList.innerHTML = `
+          <div class="no-results">
+            <div class="no-results-icon">📭</div>
+            <h3>暂无活动</h3>
+            <p>该分类下暂时没有活动</p>
+          </div>
+        `;
+      }
+
+      // 更新分页
+      paginationEl.innerHTML = generatePagination(totalPages, currentPage);
+
+      // 绑定分页点击事件
+      bindPaginationEvents();
     }
 
-    // 绑定点击事件
+    // 绑定分页点击事件
+    function bindPaginationEvents() {
+      const pageItems = paginationEl.querySelectorAll('.pagination-item:not(.disabled)');
+      pageItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const page = parseInt(this.dataset.page);
+          if (page && page !== currentPage) {
+            currentPage = page;
+            updateActivityList();
+            // 滚动到列表顶部
+            activityList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    }
+
+    // ==================== 事件绑定 ====================
+    // 分类切换
     sidebarItems.forEach(item => {
       item.addEventListener('click', function() {
         // 移除所有active类
         sidebarItems.forEach(i => i.classList.remove('active'));
         // 添加active类到当前项
         this.classList.add('active');
-        
+
         // 获取分类名称（去掉emoji）
-        const categoryName = this.textContent.trim().replace(/^\S+\s/, '');
-        
+        currentCategory = this.textContent.trim().replace(/^\S+\s/, '');
+
+        // 重置页码
+        currentPage = 1;
+
         // 更新活动列表
-        updateActivityList(categoryName);
+        updateActivityList();
       });
     });
 
-    // 页面加载时初始化活动数量显示
-    updateActivityList('全部活动');
+    // 排序切换
+    sortItems.forEach(item => {
+      item.addEventListener('click', function() {
+        // 移除所有active类
+        sortItems.forEach(i => i.classList.remove('active'));
+        // 添加active类到当前项
+        this.classList.add('active');
+
+        // 获取排序类型
+        currentSort = this.dataset.sort;
+
+        // 重置页码
+        currentPage = 1;
+
+        // 更新活动列表
+        updateActivityList();
+      });
+    });
+
+    // ==================== 初始化 ====================
+    updateActivityList();
   </script>
 </body>
 </html>
